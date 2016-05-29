@@ -1,4 +1,4 @@
-2350d322c27c6449997360b3b9716133 *DESCRIPTION
+e53409b6852714c9121f4d44b85589c2 *DESCRIPTION
 43c0bb5caef285ff9f54265c6b0c97a5 *NAMESPACE
 354ad77479a2ad89767c265e5cb40b19 *R/EkNNclus.R
 9699dbba57f5e74da00732b417103338 *R/butterfly-data.R
@@ -28,9 +28,9 @@ fbbbb1334b806cb57c171da4c136d492 *R/summary.credpart.R
 94adbc2a5546761bc777f0505f5fea6a *data/fourclass.RData
 bd3a9e6ec44171fbde7266ca7290114f *data/protein.RData
 a55edf4611e289238f6d3040a406e781 *data/s2.RData
-3fd5a0635bb0e403f65b32c3c97ab19c *inst/doc/Introduction.R
-675324c7438a6151dd0a80ad92526d96 *inst/doc/Introduction.Rmd
-ccd45bc4752320f6f6855cd5ab760068 *inst/doc/Introduction.html
+2ebb48a4743823a92645f31517999d79 *inst/doc/Introduction.R
+fb50d1ae7a61d7f7de793099ce48a640 *inst/doc/Introduction.Rmd
+53209ee1f9e87494be98e9e89d90344f *inst/doc/Introduction.html
 48c419804274d57184acd5ca4302985b *man/EkNNclus.Rd
 f492dabe9d8db213729940ac3e9df91a *man/butterfly.Rd
 2db4a9d83626ad4ff3aa57503ee4ac70 *man/cecm.Rd
