@@ -6,13 +6,20 @@
 #' This version of the EVCLUS algorithm uses the Iterative Row-wise Quadratic Programming
 #' (IRQP) algorithm (see ter Braak et al., 2009). It also makes it possible to use only
 #' a random sample of the dissimilarities, reducing the time and space complexity from
-#' quadratic to roughly linear (Denoeux et al., 2016).
+#' quadratic to roughly linear (Denoeux et al., 2016). The user must supply:
+#' 1) a matrix x or size (n,p) containing the values of p attributes for n objects, or
+#' 2) a matrix D of size (n,n) of dissimilarities between n objects, or
+#' 3) a matrix D of size (n,k) of dissimilarities between the n objects and k randomly selected
+#' objects, AND a matrix J of size (n,k) of indices, such that D[i,j] is the distance between
+#' objects i and J[i,j].
+#' In cases 1 and 2, the user may supply the number $k$ of distances to be picked randomly for
+#' each object. In case 3, k is set to the number of columns of D.
 #'
 #' @param x nxp matrix of p attributes observed for n objects (optional).
 #' @param k Number of distances to compute for each object (default: n).
 #' @param D nxn or nxk dissimilarity matrix (used only of x is not supplied).
-#' @param J n x k matrix of indices. D[i,j] is the Euclidean distance between x[i,] and
-#' x[J[i,j],]. (Used only of x is not supplied or k<n).
+#' @param J nxk matrix of indices. D[i,j] is the distance between objects i and
+#' J[i,j]. (Used only if D is supplied and ncol(D)<n; then k is set to ncol(D).)
 #' @param c Number of clusters
 #' @param type Type of focal sets ("simple": empty set, singletons and Omega;
 #' "full": all \eqn{2^c} subsets of \eqn{\Omega}; "pairs": \eqn{\emptyset}, singletons,
@@ -46,8 +53,7 @@
 #'IEEE Transactions on Systems, Man and Cybernetics B, Vol. 34, Issue 1, 95--109, 2004.
 #'
 #'T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
-#'dissimilarity data. Knowledge-Based Systems (accepted for publication),
-#'DOI: 10.1016/j.knosys.2016.05.043, 2016.
+#'dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 #'
 #'C. J. ter Braak, Y. Kourmpetis, H. A. Kiers, and M. C. Bink. Approximating a
 #'similarity matrix by a latent class model: A reappraisal of additive fuzzy clustering.
@@ -68,35 +74,66 @@
 #' data(protein)
 #' clus <- kevclus(D=protein$D,c=4,type='simple',d0=max(protein$D))
 #' z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
-#' plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,approx=1)
+#' plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
+#'
+#' ## Example with k=30
+#'
+#' clus <- kevclus(D=protein$D,k=30,c=4,type='simple',d0=max(protein$D))
+#' z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
+#' plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 #'
 kevclus<-function(x,k=n,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TRUE,maxit=1000,
                      epsi=1e-5,d0=quantile(D,0.9),tr=FALSE,change.order=FALSE){
 
-  if(!missing(x)){
+  if(!missing(x)){ # x is supplied
     x<-as.matrix(x)
     n<-nrow(x)
-    if(k==n) D<-as.matrix(dist(x))
-    else{
+    if(k==n){ # k takes default value
+      D<-as.matrix(dist(x))
+      J<-matrix(0,n,n-1)
+      D1<-J
+      for(i in 1:n){
+        J[i,]<-(1:n)[-i]
+        D1[i,]<-D[i,J[i,]]
+      } # end for
+      D<-D1
+      p<-n-1
+    } else{ #k<n
       dist<-createD(x,k)
       D<-dist$D
       J<-dist$J
-    }
+      p<-k
+      }
+  } else if(!missing(D)){ # D is supplied
+    D<-as.matrix(D)
+    n<-nrow(D)
+    p<-ncol(D)
+    if((n==p) & (k==n)){ # D is square and k takes default value
+      J<-matrix(0,n,n-1)
+      D1<-J
+      for(i in 1:n){
+        J[i,]<-(1:n)[-i]
+        D1[i,]<-D[i,J[i,]]
+      } # end for
+      D<-D1
+      p<-n-1
+    } else if((n==p) & (k<n)){ # D is square and k<n
+      D1<-matrix(0,n,k)
+      J<-D1
+      for(i in 1:n){
+        ii<-sample((1:n)[-i],k)
+        J[i,]<-ii
+        D1[i,]<-D[i,ii]
+      } # end for
+      D<-D1
+      p<-k
+    } else k<-p #  D and J are supplied
+  } else{  # neither x nor D is supplied: ERROR
+    print('ERROR: x or D must be supplied')
+    return()
   }
 
-  D<-as.matrix(D)
-  n<-nrow(D)
-  p<-ncol(D)
-  if(n==p){
-    J<-matrix(0,n,n-1)
-    D1<-J
-    for(i in 1:n){
-      J[i,]<-(1:n)[-i]
-      D1[i,]<-D[i,J[i,]]
-    }
-    D<-D1
-    p<-n-1
-  }
+
 
   if((ntrials>1) & !is.null(m0) & !change.order){
     print('WARNING: ntrials>1 and m0 provided. Parameter ntrials set to 1.')

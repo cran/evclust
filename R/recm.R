@@ -60,7 +60,7 @@
 #'  clus <- recm(D=protein$D,c=4,type='full',alpha=0.2,beta=1.1,delta2=20)
 #'
 #'  z<- cmdscale(protein$D,k=2)
-#'  plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,approx=1)
+#'  plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 
 recm<- function(D,c,type='full',pairs=NULL,Omega=TRUE,m0=NULL,ntrials=1,alpha=1,beta=1.5,
                 delta2=quantile(D[upper.tri(D)|lower.tri(D)],0.95),epsi=1e-4,maxit=5000,

@@ -18,7 +18,7 @@ clus<-ecm(x,c=4,type='pairs',alpha=1,beta=2,delta=sqrt(20),disp=FALSE)
 summary(clus)
 
 ## ---- fig.width=6, fig.height=6------------------------------------------
-plot(clus,x,mfrow=c(2,2),ytrue=y,approx=2)
+plot(clus,x,mfrow=c(2,2),ytrue=y,Approx=2)
 
 ## ------------------------------------------------------------------------
 data(protein)
@@ -69,7 +69,7 @@ P$pairs
 
 ## ---- fig.width=6, fig.height=6------------------------------------------
 clus1<-ecm(x=s2,c=15,type='pairs',Omega=FALSE,pairs=P$pairs,g0=clus$g,delta=1,disp=FALSE)
-plot(x=clus1,X=s2,Outliers = TRUE,approx=2)
+plot(x=clus1,X=s2,Outliers = TRUE,Approx=2)
 
 ## ------------------------------------------------------------------------
 data(fourclass)
@@ -88,5 +88,5 @@ const<-create_MLCL(y,nbConst=30)
 
 ## ---- message=FALSE------------------------------------------------------
 clus<-cecm(x,c=2,type='full',ntrials=5,ML=const$ML,CL=const$CL,delta=10,bal=0.5,distance=1,disp=FALSE)
-plot(clus,X=x,ytrue=y,Outliers=TRUE,approx=1)
+plot(clus,X=x,ytrue=y,Outliers=TRUE,Approx=1)
 

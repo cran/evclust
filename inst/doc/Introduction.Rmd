@@ -59,10 +59,10 @@ summary(clus)
 A plot of the credal partition can be generated as follows:
 
 ```{r, fig.width=6, fig.height=6}
-plot(clus,x,mfrow=c(2,2),ytrue=y,approx=2)
+plot(clus,x,mfrow=c(2,2),ytrue=y,Approx=2)
 ```
 
-In this plot, the lower and upper approximations of each cluster are plotted as solid and interrupted lines, respectively. Since we selected `approx=2`, the lower and upper approximations are defined as follows. Let $A_i$ be the focal set of mass function $m_i$ with the largest mass. The lower approximation of cluster $\omega_k$  is  the set of objects such that $A_i=\{\omega_k\}$, while the upper approximation is  the set of objects such that $\omega_k \in A_i$. The outliers are the objects such that $A_i=\emptyset$. They are displayed as circles in the figure above.
+In this plot, the lower and upper approximations of each cluster are plotted as solid and interrupted lines, respectively. Since we selected `Approx=2`, the lower and upper approximations are defined as follows. Let $A_i$ be the focal set of mass function $m_i$ with the largest mass. The lower approximation of cluster $\omega_k$  is  the set of objects such that $A_i=\{\omega_k\}$, while the upper approximation is  the set of objects such that $\omega_k \in A_i$. The outliers are the objects such that $A_i=\emptyset$. They are displayed as circles in the figure above.
 
 ## RECM
 
@@ -161,7 +161,7 @@ Finally, we run again `ecm`, with the pairs of clusters found in the previous st
 
 ```{r, fig.width=6, fig.height=6}
 clus1<-ecm(x=s2,c=15,type='pairs',Omega=FALSE,pairs=P$pairs,g0=clus$g,delta=1,disp=FALSE)
-plot(x=clus1,X=s2,Outliers = TRUE,approx=2)
+plot(x=clus1,X=s2,Outliers = TRUE,Approx=2)
 ```
 
 This time, we can see that the outer approximations of neighboring clusters overlap, reflecting uncertainty in the partition.
@@ -170,7 +170,7 @@ This time, we can see that the outer approximations of neighboring clusters over
 
 The clustering task can be made easier if we have some prior knowledge of the underlying partition. Such knowledge can take the form of *must-link* (ML) constraints (pairs of objects that are known to belong to the same clusters) and *cannot-link* (CL) constraints (pairs of objects that are known to belong to different clusters). The CECM algorithm [@antoine12] is a variant of ECM that makes it possible to handle such constraints. 
 
-Consider, for instance, the Four-class dataset. It is actually composed of four clusters, but let us assume that the parition of interest has only two groups, with clusters 1-2 and 3-4 in the first group. We can display the corresponding binary partition:
+Consider, for instance, the Four-class dataset. It is actually composed of four clusters, but let us assume that the partition of interest has only two groups, with clusters 1-2 and 3-4 in the first group. We can display the corresponding binary partition:
 
 ```{r}
 data(fourclass)
@@ -181,7 +181,7 @@ y<-2-(y<=2)
 plot(x[,1],x[,2],pch=y,col=y)
 ```
 
-Depending on the initial conditions, `ecm` may converge to this partition, or to a partition close to the followong one:
+Depending on the initial conditions, `ecm` may converge to this partition, or to a partition close to the following one:
 
 ```{r}
 y1<-((fourclass[,3]==1) | (fourclass[,3]==3))+1
@@ -198,7 +198,7 @@ Here, we generated 30 constraints, of ML or VL type. These constraints can be pa
 
 ```{r, message=FALSE}
 clus<-cecm(x,c=2,type='full',ntrials=5,ML=const$ML,CL=const$CL,delta=10,bal=0.5,distance=1,disp=FALSE)
-plot(clus,X=x,ytrue=y,Outliers=TRUE,approx=1)
+plot(clus,X=x,ytrue=y,Outliers=TRUE,Approx=1)
 ```
 
 More sophisticated active learning stategies for selecting the constraints are described in [@antoine12].

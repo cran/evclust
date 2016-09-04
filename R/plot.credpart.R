@@ -17,7 +17,7 @@
 #' to the maximum plausibility is used instead.
 #' @param Outliers If TRUE, the outliers are plotted, and they are not included in the lower
 #' and upper approximations of the clusters.
-#' @param approx If approx==1 (default), the lower and upper cluster approximations are
+#' @param Approx If Approx==1 (default), the lower and upper cluster approximations are
 #' computed using the interval dominance rule. Otherwise, the maximum mass rule is used.
 #' @param cex Size of data points.
 #' @param cex_outliers Size of data points for outliers.
@@ -47,8 +47,7 @@
 #' Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.
 #'
 #'T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
-#'dissimilarity data. Knowledge-Based Systems (accepted), DOI: 10.1016/j.knosys.2016.05.043,
-#'2016.
+#'dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 #'
 #' Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 #' @examples
@@ -61,7 +60,7 @@
 #' clus<-kevclus(x=x,k=100,c=c,type='simple')
 #' ## Plot the results
 #' plot(clus,X=x,mfrow=c(2,2),ytrue=y)
-plot.credpart <- function(x,X=NULL,...,mfrow=c(1,1),ytrue=NULL,Outliers=TRUE,approx=1,cex=0.7,
+plot.credpart <- function(x,X=NULL,...,mfrow=c(1,1),ytrue=NULL,Outliers=TRUE,Approx=1,cex=0.7,
                           cex_outliers=1.3,lwd=2,ask=FALSE){
   clus<-x
   if(!is.null(X)){
@@ -75,7 +74,7 @@ plot.credpart <- function(x,X=NULL,...,mfrow=c(1,1),ytrue=NULL,Outliers=TRUE,app
     outlier<-which(rowSums(clus$Y)==0)
     c<-max(clus$y.pl)
 
-    if(approx==1){
+    if(Approx==1){
       lower.approx<-clus$lower.approx.nd
       upper.approx<-clus$upper.approx.nd
     }else{

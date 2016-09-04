@@ -1,8 +1,8 @@
 Package: evclust
 Type: Package
 Title: Evidential Clustering
-Version: 1.0.2
-Date: 2016-05-15
+Version: 1.0.3
+Date: 2016-08-28
 Author: Thierry Denoeux
 Maintainer: Thierry Denoeux <tdenoeux@utc.fr>
 Description: Various clustering algorithms that produce a credal partition,
@@ -18,6 +18,6 @@ RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 Suggests: knitr,rmarkdown
 NeedsCompilation: no
-Packaged: 2016-05-29 01:32:04 UTC; Thierry
+Packaged: 2016-08-28 08:01:54 UTC; Thierry
 Repository: CRAN
-Date/Publication: 2016-05-29 09:38:52
+Date/Publication: 2016-09-04 13:29:43

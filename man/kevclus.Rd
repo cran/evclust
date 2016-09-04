@@ -15,8 +15,8 @@ kevclus(x, k = n, D, J, c, type = "simple", pairs = NULL, m0 = NULL,
 
 \item{D}{nxn or nxk dissimilarity matrix (used only of x is not supplied).}
 
-\item{J}{n x k matrix of indices. D[i,j] is the Euclidean distance between x[i,] and
-x[J[i,j],]. (Used only of x is not supplied or k<n).}
+\item{J}{n x k matrix of indices. D[i,j] is the distance between objects i and
+J[i,j]. (Used only if D is supplied and k<n).}
 
 \item{c}{Number of clusters}
 
@@ -64,7 +64,12 @@ algorithm.
 This version of the EVCLUS algorithm uses the Iterative Row-wise Quadratic Programming
 (IRQP) algorithm (see ter Braak et al., 2009). It also makes it possible to use only
 a random sample of the dissimilarities, reducing the time and space complexity from
-quadratic to roughly linear (Denoeux et al., 2016).
+quadratic to roughly linear (Denoeux et al., 2016). The user must supply:
+- a matrix x or size (n,p) containing the values of p attributes for n objects, or
+- a matrix D of size (n,n) of dissimilarities between n objects, or
+- a matrix D of size (n,k) of dissimilarities between the n objects and k randomly selected
+objects, and a matrix J of size (n,k) of indices, such that D[i,j] is the distance between
+objects i and J[i,j].
 }
 \examples{
 ## Example with a non metric dissimilarity matrix: the Protein dataset
@@ -72,7 +77,7 @@ quadratic to roughly linear (Denoeux et al., 2016).
 data(protein)
 clus <- kevclus(D=protein$D,c=4,type='simple',d0=max(protein$D))
 z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
-plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,approx=1)
+plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 
 }
 \author{
@@ -83,8 +88,7 @@ T. Denoeux and M.-H. Masson. EVCLUS: Evidential Clustering of Proximity Data.
 IEEE Transactions on Systems, Man and Cybernetics B, Vol. 34, Issue 1, 95--109, 2004.
 
 T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
-dissimilarity data. Knowledge-Based Systems (accepted for publication),
-DOI: 10.1016/j.knosys.2016.05.043, 2016.
+dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 
 C. J. ter Braak, Y. Kourmpetis, H. A. Kiers, and M. C. Bink. Approximating a
 similarity matrix by a latent class model: A reappraisal of additive fuzzy clustering.

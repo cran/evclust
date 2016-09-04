@@ -32,8 +32,7 @@
 #'Knowledge-Based Systems, Vol. 88, pages 57--69, 2015.
 #'
 #'T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
-#'dissimilarity data. Knowledge-Based Systems (accepted for publication),
-#'DOI:10.1016/j.knosys.2016.05.043, 2016.
+#'dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 #'
 #' M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy c-means algorithm.
 #' Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.

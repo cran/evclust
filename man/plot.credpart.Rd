@@ -5,7 +5,7 @@
 \title{Plotting a credal partition}
 \usage{
 \method{plot}{credpart}(x, X = NULL, ..., mfrow = c(1, 1), ytrue = NULL,
-  Outliers = TRUE, approx = 1, cex = 0.7, cex_outliers = 1.3, lwd = 2,
+  Outliers = TRUE, Approx = 1, cex = 0.7, cex_outliers = 1.3, lwd = 2,
   ask = FALSE)
 }
 \arguments{
@@ -26,7 +26,7 @@ to the maximum plausibility is used instead.}
 \item{Outliers}{If TRUE, the outliers are plotted, and they are not included in the lower
 and upper approximations of the clusters.}
 
-\item{approx}{If approx==1 (default), the lower and upper cluster approximations are
+\item{Approx}{If Approx==1 (default), the lower and upper cluster approximations are
 computed using the interval dominance rule. Otherwise, the maximum mass rule is used.}
 
 \item{cex}{Size of data points.}
@@ -72,8 +72,7 @@ M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy c-means alg
 Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.
 
 T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
-dissimilarity data. Knowledge-Based Systems (accepted), DOI: 10.1016/j.knosys.2016.05.043,
-2016.
+dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 
 Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }

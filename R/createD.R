@@ -7,7 +7,7 @@
 #' @param x n x p data matrix.
 #' @param k Number of distances. If missing, an n x n distance matrix is computed.
 #'
-#' @return A list with two elemnents:
+#' @return A list with two elements:
 #' \describe{
 #' \item{D}{n x k distance matrix.}
 #' \item{J}{n x k matrix of indices. D[i,j] is the Euclidean distance between x[i,] and

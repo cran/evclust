@@ -74,7 +74,7 @@ lines(1:n,m[,4],lty=4)
  clus <- recm(D=protein$D,c=4,type='full',alpha=0.2,beta=1.1,delta2=20)
 
  z<- cmdscale(protein$D,k=2)
- plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,approx=1)
+ plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 }
 \author{
 Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).

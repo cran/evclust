@@ -65,7 +65,7 @@ data(fourclass)
 x<-fourclass[,1:2]
 y<-fourclass[,3]
 clus<-ecm(x,c=4,type='full',alpha=1,beta=2,delta=sqrt(20),epsi=1e-3,disp=TRUE)
-plot(clus,X=x,mfrow=c(2,2),ytrue=y,Outliers=TRUE,approx=2)
+plot(clus,X=x,mfrow=c(2,2),ytrue=y,Outliers=TRUE,Approx=2)
 }
 \author{
 Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).

@@ -15,13 +15,13 @@ attributes.}
 \item{c}{Number of  clusters.}
 
 \item{type}{Type of focal sets ("simple": empty set, singletons and Omega;
-"full": all 2^c subsets of Omega; "pairs": empty set, singletons, Omega, and all
-or selected pairs).}
+"full": all \eqn{2^c} subsets of \eqn{\Omega}; "pairs": \eqn{\emptyset}, singletons,
+\eqn{\Omega}, and all or selected pairs).}
 
 \item{pairs}{Set of pairs to be included in the focal sets; if NULL, all pairs are
 included. Used only if type="pairs".}
 
-\item{ntrials}{Number of runs of the optimization algorithm (set to 1 if \code{m0} is  supplied).}
+\item{ntrials}{Number of runs of the optimization algorithm (set to 1 if \code{g0} is  supplied).}
 
 \item{ML}{Matrix nbML x 2 of must-link constraints. Each row of ML contains the indices
 of objects that belong to the same class.}
@@ -36,7 +36,7 @@ initialized randomly.}
 
 \item{delta}{Distance to the empty set.}
 
-\item{bal}{Tradeoff between the objectif function Jecm and the constraints:
+\item{bal}{Tradeoff between the objective function Jecm and the constraints:
 Jcecm=(1-bal)Jecm + bal Jconst.}
 
 \item{distance}{Type of distance use: 0=Euclidean, 1=Mahalanobis.}

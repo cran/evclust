@@ -12,7 +12,7 @@ createD(x, k)
 \item{k}{Number of distances. If missing, an n x n distance matrix is computed.}
 }
 \value{
-A list with two elemnents:
+A list with two elements:
 \describe{
 \item{D}{n x k distance matrix.}
 \item{J}{n x k matrix of indices. D[i,j] is the Euclidean distance between x[i,] and
