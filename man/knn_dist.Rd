@@ -35,10 +35,9 @@ knn<-knn_dist(D,K=2)
 knn$nn.dist
 knn$nn.index
 }
-\author{
-Thierry Denoeux.
-}
 \seealso{
 \code{\link[FNN]{get.knn}}, \code{\link{EkNNclus}}
 }
-
+\author{
+Thierry Denoeux.
+}

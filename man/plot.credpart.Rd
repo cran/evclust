@@ -4,9 +4,19 @@
 \alias{plot.credpart}
 \title{Plotting a credal partition}
 \usage{
-\method{plot}{credpart}(x, X = NULL, ..., mfrow = c(1, 1), ytrue = NULL,
-  Outliers = TRUE, Approx = 1, cex = 0.7, cex_outliers = 1.3, lwd = 2,
-  ask = FALSE)
+\method{plot}{credpart}(
+  x,
+  X = NULL,
+  ...,
+  mfrow = c(1, 1),
+  ytrue = NULL,
+  Outliers = TRUE,
+  Approx = 1,
+  cex = 0.7,
+  cex_outliers = 1.3,
+  lwd = 2,
+  ask = FALSE
+)
 }
 \arguments{
 \item{x}{An object of class \code{"credpart"}, encoding a credal partition.}
@@ -80,4 +90,3 @@ Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 \code{\link{extractMass}}, \code{\link{summary.credpart}}, \code{\link{ecm}},
 \code{\link{recm}}, \code{\link{cecm}}, \code{\link{kevclus}}.
 }
-

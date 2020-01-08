@@ -37,4 +37,3 @@ F<-makeF(c,type='pairs',Omega=FALSE)
 F<-makeF(c,type='pairs',pairs=matrix(c(1,2,1,3),nrow=2,byrow=TRUE))
 
 }
-

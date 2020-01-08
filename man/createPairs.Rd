@@ -68,4 +68,3 @@ Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 \code{\link{extractMass}}, \code{\link{ecm}}, \code{\link{recm}},
 \code{\link{cecm}}, \code{\link{kevclus}}.
 }
-

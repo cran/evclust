@@ -35,4 +35,3 @@ dim(dist$J)
 \seealso{
 \code{\link{kevclus}}
 }
-

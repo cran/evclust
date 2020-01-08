@@ -37,4 +37,3 @@ T. Denoeux and M.-H. Masson. EVCLUS: Evidential Clustering of Proximity Data.
 IEEE Transactions on Systems, Man and Cybernetics B, Vol. 34, Issue 1, 95--109, 2004.
 }
 \keyword{datasets}
-

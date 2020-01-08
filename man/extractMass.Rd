@@ -4,8 +4,18 @@
 \alias{extractMass}
 \title{Creates an object of class "credalPart"}
 \usage{
-extractMass(mass, F, g = NULL, S = NULL, method, crit, Kmat = NULL,
-  trace = NULL, D = NULL, W = NULL)
+extractMass(
+  mass,
+  F,
+  g = NULL,
+  S = NULL,
+  method,
+  crit,
+  Kmat = NULL,
+  trace = NULL,
+  D = NULL,
+  W = NULL
+)
 }
 \arguments{
 \item{mass}{A credal partition (a matrix of n rows and f columns, where n is the
@@ -112,4 +122,3 @@ Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 \seealso{
 \code{\link{plot.credpart}}, \code{\link{summary.credpart}}
 }
-

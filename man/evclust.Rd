@@ -3,7 +3,6 @@
 \docType{package}
 \name{evclust}
 \alias{evclust}
-\alias{evclust-package}
 \title{evclust: A package for evidential clustering}
 \description{
 Various clustering algorithms that generate a credal partition, i.e., a set of mass
@@ -43,4 +42,3 @@ Pattern Recognition Letters, Vol. 30, pages 1015--1026, 2009.
 \code{\link{ecm}}, \code{\link{recm}},
 \code{\link{cecm}}, \code{\link{kevclus}}, \code{\link{EkNNclus}}.
 }
-

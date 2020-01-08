@@ -4,8 +4,7 @@
 \alias{EkNNclus}
 \title{EkNNclus algorithm}
 \usage{
-EkNNclus(x, D, K, y0, ntrials = 1, q = 0.5, p = 1, disp = TRUE,
-  tr = FALSE)
+EkNNclus(x, D, K, y0, ntrials = 1, q = 0.5, p = 1, disp = TRUE, tr = FALSE)
 }
 \arguments{
 \item{x}{n x p data matrix (n instances, p attributes).}
@@ -61,13 +60,12 @@ plot(0:(L[imax]-1),-clus$trace[clus$trace[,1]==imax,3],type="l",lty=imax,
 xlab="time steps",ylab="energy")
 for(i in (1:N)) if(i != imax) lines(0:(L[i]-1),-clus$trace[clus$trace[,1]==i,3],type="l",lty=i)
 }
-\author{
-Thierry Denoeux.
-}
 \references{
 T. Denoeux, O. Kanjanatarakul and S. Sriboonchitta.
  EK-NNclus: a clustering procedure based on the evidential K-nearest neighbor rule.
  Knowledge-Based Systems, Vol. 88, pages 57--69, 2015.
  Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
-
+\author{
+Thierry Denoeux.
+}

@@ -32,4 +32,3 @@ const$CL
 \seealso{
 \code{\link{cecm}}
 }
-

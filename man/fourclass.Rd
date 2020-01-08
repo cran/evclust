@@ -23,4 +23,3 @@ M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy c-means alg
 Pattern Recognition, Vol. 41, Issue 4, pages 1384-1397, 2008.
 }
 \keyword{datasets}
-

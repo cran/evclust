@@ -4,9 +4,20 @@
 \alias{ecm}
 \title{Evidential c-means algorithm}
 \usage{
-ecm(x, c, g0 = NULL, type = "full", pairs = NULL, Omega = TRUE,
-  ntrials = 1, alpha = 1, beta = 2, delta = 10, epsi = 0.001,
-  disp = TRUE)
+ecm(
+  x,
+  c,
+  g0 = NULL,
+  type = "full",
+  pairs = NULL,
+  Omega = TRUE,
+  ntrials = 1,
+  alpha = 1,
+  beta = 2,
+  delta = 10,
+  epsi = 0.001,
+  disp = TRUE
+)
 }
 \arguments{
 \item{x}{input matrix of size n x d, where n is the number of objects and d the number of
@@ -67,9 +78,6 @@ y<-fourclass[,3]
 clus<-ecm(x,c=4,type='full',alpha=1,beta=2,delta=sqrt(20),epsi=1e-3,disp=TRUE)
 plot(clus,X=x,mfrow=c(2,2),ytrue=y,Outliers=TRUE,Approx=2)
 }
-\author{
-Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).
-}
 \references{
 M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy
 c-means algorithm. Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.
@@ -79,4 +87,6 @@ Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 \code{\link{makeF}}, \code{\link{extractMass}}, \code{\link{recm}}, \code{\link{cecm}},
 \code{\link{plot.credpart}}
 }
-
+\author{
+Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).
+}

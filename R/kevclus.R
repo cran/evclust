@@ -70,7 +70,7 @@
 #' @seealso \code{\link{createD}}, \code{\link{makeF}}, \code{\link{extractMass}}
 #'
 #' @examples ## Example with a non metric dissimilarity matrix: the Protein dataset
-#'
+#'\dontrun{
 #' data(protein)
 #' clus <- kevclus(D=protein$D,c=4,type='simple',d0=max(protein$D))
 #' z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
@@ -81,6 +81,7 @@
 #' clus <- kevclus(D=protein$D,k=30,c=4,type='simple',d0=max(protein$D))
 #' z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
 #' plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
+#' }
 #'
 kevclus<-function(x,k=n,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TRUE,maxit=1000,
                      epsi=1e-5,d0=quantile(D,0.9),tr=FALSE,change.order=FALSE){

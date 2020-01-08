@@ -4,9 +4,23 @@
 \alias{kevclus}
 \title{k-EVCLUS algorithm}
 \usage{
-kevclus(x, k = n, D, J, c, type = "simple", pairs = NULL, m0 = NULL,
-  ntrials = 1, disp = TRUE, maxit = 1000, epsi = 1e-05,
-  d0 = quantile(D, 0.9), tr = FALSE, change.order = FALSE)
+kevclus(
+  x,
+  k = n,
+  D,
+  J,
+  c,
+  type = "simple",
+  pairs = NULL,
+  m0 = NULL,
+  ntrials = 1,
+  disp = TRUE,
+  maxit = 1000,
+  epsi = 1e-05,
+  d0 = quantile(D, 0.9),
+  tr = FALSE,
+  change.order = FALSE
+)
 }
 \arguments{
 \item{x}{nxp matrix of p attributes observed for n objects (optional).}
@@ -15,8 +29,8 @@ kevclus(x, k = n, D, J, c, type = "simple", pairs = NULL, m0 = NULL,
 
 \item{D}{nxn or nxk dissimilarity matrix (used only of x is not supplied).}
 
-\item{J}{n x k matrix of indices. D[i,j] is the distance between objects i and
-J[i,j]. (Used only if D is supplied and k<n).}
+\item{J}{nxk matrix of indices. D[i,j] is the distance between objects i and
+J[i,j]. (Used only if D is supplied and ncol(D)<n; then k is set to ncol(D).)}
 
 \item{c}{Number of clusters}
 
@@ -65,23 +79,29 @@ This version of the EVCLUS algorithm uses the Iterative Row-wise Quadratic Progr
 (IRQP) algorithm (see ter Braak et al., 2009). It also makes it possible to use only
 a random sample of the dissimilarities, reducing the time and space complexity from
 quadratic to roughly linear (Denoeux et al., 2016). The user must supply:
-- a matrix x or size (n,p) containing the values of p attributes for n objects, or
-- a matrix D of size (n,n) of dissimilarities between n objects, or
-- a matrix D of size (n,k) of dissimilarities between the n objects and k randomly selected
-objects, and a matrix J of size (n,k) of indices, such that D[i,j] is the distance between
+1) a matrix x or size (n,p) containing the values of p attributes for n objects, or
+2) a matrix D of size (n,n) of dissimilarities between n objects, or
+3) a matrix D of size (n,k) of dissimilarities between the n objects and k randomly selected
+objects, AND a matrix J of size (n,k) of indices, such that D[i,j] is the distance between
 objects i and J[i,j].
+In cases 1 and 2, the user may supply the number $k$ of distances to be picked randomly for
+each object. In case 3, k is set to the number of columns of D.
 }
 \examples{
 ## Example with a non metric dissimilarity matrix: the Protein dataset
-
+\dontrun{
 data(protein)
 clus <- kevclus(D=protein$D,c=4,type='simple',d0=max(protein$D))
 z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
 plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 
+## Example with k=30
+
+clus <- kevclus(D=protein$D,k=30,c=4,type='simple',d0=max(protein$D))
+z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
+plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 }
-\author{
-Thierry Denoeux.
+
 }
 \references{
 T. Denoeux and M.-H. Masson. EVCLUS: Evidential Clustering of Proximity Data.
@@ -99,4 +119,6 @@ Computational Statistics & Data Analysis, 53(8):3183--3193, 2009.
 \seealso{
 \code{\link{createD}}, \code{\link{makeF}}, \code{\link{extractMass}}
 }
-
+\author{
+Thierry Denoeux.
+}

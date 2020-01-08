@@ -28,4 +28,3 @@ dissimilarity data. Knowledge-Based Systems (accepted for publication),
 DOI: 10.1016/j.knosys.2016.05.043, 2016.
 }
 \keyword{datasets}
-

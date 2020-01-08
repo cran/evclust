@@ -4,9 +4,21 @@
 \alias{recm}
 \title{Relational Evidential c-means algorithm}
 \usage{
-recm(D, c, type = "full", pairs = NULL, Omega = TRUE, m0 = NULL,
-  ntrials = 1, alpha = 1, beta = 1.5, delta2 = quantile(D[upper.tri(D) |
-  lower.tri(D)], 0.95), epsi = 1e-04, maxit = 5000, disp = TRUE)
+recm(
+  D,
+  c,
+  type = "full",
+  pairs = NULL,
+  Omega = TRUE,
+  m0 = NULL,
+  ntrials = 1,
+  alpha = 1,
+  beta = 1.5,
+  delta2 = quantile(D[upper.tri(D) | lower.tri(D)], 0.95),
+  epsi = 1e-04,
+  maxit = 5000,
+  disp = TRUE
+)
 }
 \arguments{
 \item{D}{Dissimilarity matrix of size (n,n), where n is the number of objects.
@@ -76,9 +88,6 @@ lines(1:n,m[,4],lty=4)
  z<- cmdscale(protein$D,k=2)
  plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 }
-\author{
-Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).
-}
 \references{
 M.-H. Masson and T. Denoeux. RECM: Relational Evidential c-means algorithm.
 Pattern Recognition Letters, Vol. 30, pages 1015--1026, 2009.
@@ -87,4 +96,6 @@ Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 \seealso{
 \code{\link{makeF}}, \code{\link{extractMass}}, \code{\link{ecm}}
 }
-
+\author{
+Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).
+}

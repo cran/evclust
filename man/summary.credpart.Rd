@@ -41,8 +41,7 @@ M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy c-means alg
 Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.
 
 T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
-dissimilarity data. Knowledge-Based Systems (accepted),
-DOI: 10.1016/j.knosys.2016.05.043, 2016.
+dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 
 Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
@@ -50,4 +49,3 @@ Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 \code{\link{extractMass}}, \code{\link{plot.credpart}}, \code{\link{ecm}},
 \code{\link{recm}}, \code{\link{cecm}}, \code{\link{EkNNclus}}, \code{\link{kevclus}}.
 }
-

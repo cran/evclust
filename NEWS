@@ -1,0 +1,8 @@
+Package: evclust
+Title: Evidential Clustering
+Version: 1.1.0
+
+This version has a new function: bootclus, which computes a credal partition by bootstrapping Gaussian mixture models.
+
+Reference:
+T. Denoeux. Calibrated model-based evidential clustering using bootstrapping. Preprint arXiv:1912.06137, 2019.
