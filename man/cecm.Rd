@@ -15,7 +15,7 @@ cecm(
   g0 = NULL,
   alpha = 1,
   delta = 10,
-  bal = 0.5,
+  xi = 0.5,
   distance = 0,
   epsi = 0.001,
   disp = TRUE
@@ -49,8 +49,8 @@ initialized randomly.}
 
 \item{delta}{Distance to the empty set.}
 
-\item{bal}{Tradeoff between the objective function Jecm and the constraints:
-Jcecm=(1-bal)Jecm + bal Jconst.}
+\item{xi}{Tradeoff between the objective function Jecm and the constraints:
+Jcecm=(1-xi)Jecm + xi Jconst.}
 
 \item{distance}{Type of distance use: 0=Euclidean, 1=Mahalanobis.}
 
@@ -83,6 +83,7 @@ dispatch mechanism. They are not error messages, and they can be ignored.
 }
 \examples{
 ## Generation of a two-class dataset
+\dontrun{
 n<-30
 x<-cbind(0.2*rnorm(n),rnorm(n))
 y<-c(rep(1,n/2),rep(2,n/2))
@@ -94,10 +95,11 @@ const<-create_MLCL(y,nbConst=10)
 clus<-cecm(x=x,c=2,ML=const$M,CL=const$CL,delta=10)
 plot(x[,1],x[,2],asp=1,pch=clus$y.pl,col=y)
 }
+}
 \references{
 V. Antoine, B. Quost, M.-H. Masson and T. Denoeux. CECM: Constrained
 Evidential C-Means algorithm. Computational Statistics and Data Analysis, Vol. 56,
-Issue 4, pages 894--914, 2012. Available from \url{https://www.hds.utc.fr/~tdenoeux}.
+Issue 4, pages 894--914, 2012. 
 
 Y. Ye. On affine-scaling algorithm for nonconvex quadratic programming.
 Math. Programming 56 (1992) 285--300.

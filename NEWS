@@ -1,8 +1,12 @@
 Package: evclust
 Title: Evidential Clustering
-Version: 1.1.0
+Version: 2.0.0
 
-This version has a new function: bootclus, which computes a credal partition by bootstrapping Gaussian mixture models.
+This is a major update with several new functions, including bpec for belief peak evidential clustering, kcevclus for constraint evidential clustering, nnevclus for neural-network based evidential clustering. The new function credal_RI computes generalizations of the Rand index to compare credal partitions. The new S3 method "predict" makes it possible to compute an evidential partition for new data, using the results of ecm or nnevclus for the training data. The plot method has been updated.
 
-Reference:
-T. Denoeux. Calibrated model-based evidential clustering using bootstrapping. Preprint arXiv:1912.06137, 2019.
+References:
+
+T. Denoeux, S. Li and S. Sriboonchitta. Evaluating and Ccmparing soft partitions: an approach based on Dempster-Shafer Theory. IEEE Transactions on Fuzzy Systems 26(3):1231-1244, 2018.
+F. Li, S. Li and T. Denoeux. k-CEVCLUS: Constrained evidential clustering oflarge dissimilarity data. Knowledge-Based Systems 142:29-44, 2018.
+Z.-G. Su and T. Denoeux. BPEC: Belief-Peaks Evidential Clustering. IEEE Transactions on Fuzzy Systems, 27(1):111-123, 2019.
+T. Denoeux. NN-EVCLUS: Neural Network-based Evidential Clustering. arXiv:2009.12795, 2020.

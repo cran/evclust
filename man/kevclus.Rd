@@ -6,7 +6,7 @@
 \usage{
 kevclus(
   x,
-  k = n,
+  k = n - 1,
   D,
   J,
   c,
@@ -19,13 +19,14 @@ kevclus(
   epsi = 1e-05,
   d0 = quantile(D, 0.9),
   tr = FALSE,
-  change.order = FALSE
+  change.order = FALSE,
+  norm = 1
 )
 }
 \arguments{
 \item{x}{nxp matrix of p attributes observed for n objects (optional).}
 
-\item{k}{Number of distances to compute for each object (default: n).}
+\item{k}{Number of distances to compute for each object (default: n-1).}
 
 \item{D}{nxn or nxk dissimilarity matrix (used only of x is not supplied).}
 
@@ -60,6 +61,8 @@ to d0 is 0.95.}
 
 \item{change.order}{If TRUE, the order of objects is changed at each iteration of the
 Iterative Row-wise Quadratic Programming (IRQP) algorithm.}
+
+\item{norm}{Normalization of distances. 1: division by mean(D^2) (default); 2: division par n*p.}
 }
 \value{
 The credal partition (an object of class \code{"credpart"}). In addition to the
@@ -68,6 +71,7 @@ usual attributes, the output credal partition has the following attributes:
   \item{Kmat}{The matrix of degrees of conflict. Same size as D.}
   \item{D}{The normalized dissimilarity matrix.}
   \item{trace}{Trace of the algorithm (Stress function vs iterations).}
+  \item{J}{The matrix of indices.}
  }
 }
 \description{
@@ -94,9 +98,7 @@ data(protein)
 clus <- kevclus(D=protein$D,c=4,type='simple',d0=max(protein$D))
 z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
 plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
-
 ## Example with k=30
-
 clus <- kevclus(D=protein$D,k=30,c=4,type='simple',d0=max(protein$D))
 z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
 plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
@@ -113,8 +115,6 @@ dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 C. J. ter Braak, Y. Kourmpetis, H. A. Kiers, and M. C. Bink. Approximating a
 similarity matrix by a latent class model: A reappraisal of additive fuzzy clustering.
 Computational Statistics & Data Analysis, 53(8):3183--3193, 2009.
-
- Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
 \seealso{
 \code{\link{createD}}, \code{\link{makeF}}, \code{\link{extractMass}}

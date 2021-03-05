@@ -33,30 +33,32 @@
 #' @param beta Exponent of masses in the cost function.
 #' @param delta Distance to the empty set.
 #' @param epsi Minimum amount of improvement.
+#' @param init Initialization: "kmeans" (default) or "rand" (random).
 #' @param disp If TRUE (default), intermediate results are displayed.
 #'
 #' @return The credal partition (an object of class \code{"credpart"}).
 #'
 #'@references M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy
 #'c-means algorithm. Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.
-#'Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 #'
 #'@author Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).
 #'
 #' @export
-#' @importFrom stats rnorm
+#' @importFrom stats rnorm kmeans
 #'
 #' @seealso \code{\link{makeF}}, \code{\link{extractMass}}, \code{\link{recm}}, \code{\link{cecm}},
 #' \code{\link{plot.credpart}}
 #'
 #' @examples ## Clustering of the Four-class dataset
+#' \dontrun{
 #' data(fourclass)
 #' x<-fourclass[,1:2]
 #' y<-fourclass[,3]
 #' clus<-ecm(x,c=4,type='full',alpha=1,beta=2,delta=sqrt(20),epsi=1e-3,disp=TRUE)
 #' plot(clus,X=x,mfrow=c(2,2),ytrue=y,Outliers=TRUE,Approx=2)
+#' }
 ecm<-function(x,c,g0=NULL,type='full',pairs=NULL,Omega=TRUE,ntrials=1,alpha=1,beta=2,delta=10,
-              epsi=1e-3,disp=TRUE){
+              epsi=1e-3,init="kmeans",disp=TRUE){
 
   #---------------------- initialisations --------------------------------------
 
@@ -77,7 +79,9 @@ ecm<-function(x,c,g0=NULL,type='full',pairs=NULL,Omega=TRUE,ntrials=1,alpha=1,be
   #------------------------ iterations--------------------------------
   Jbest<-Inf
   for(itrial in 1:ntrials){
-    if(is.null(g0))  g <- x[sample(1:n,c),]+0.1*rnorm(c*d,c,d) else g<- g0
+    if(is.null(g0)){
+      if(init=="kmeans") g<-kmeans(x,c)$centers else g <- x[sample(1:n,c),]+0.1*rnorm(c*d,c,d)
+    } else g<- g0
     pasfini<-TRUE
     Jold <- Inf
     gplus<-matrix(0,f-1,d)
@@ -92,10 +96,7 @@ ecm<-function(x,c,g0=NULL,type='full',pairs=NULL,Omega=TRUE,ntrials=1,alpha=1,be
 
       # calculation of distances to centers
       D<-matrix(0,n,f-1)
-      for(j in 1:f-1){
-        D[,j]<- rowSums((x-matrix(gplus[j,],n,d,byrow = TRUE))^2)
-      }
-
+      for(j in 1:(f-1)) D[,j]<- rowSums((x-matrix(gplus[j,],n,d,byrow = TRUE))^2)
 
       # Calculation of masses
       m <- matrix(0,n,f-1)
@@ -106,6 +107,7 @@ ecm<-function(x,c,g0=NULL,type='full',pairs=NULL,Omega=TRUE,ntrials=1,alpha=1,be
           vect2 <-  rep(card[j]^(alpha/(beta-1)),f-1) /(card^(alpha/(beta-1)))
           vect3 <- vect1 * vect2
           m[i,j]<- 1/(  sum(vect3) + (card[j]^alpha * D[i,j]/delta2)^(1/(beta-1))  )
+          if(is.nan(m[i,j])) m[i,j]<-1 # in case the initial prototypes are training vectors
         }
       }
 
@@ -163,7 +165,8 @@ ecm<-function(x,c,g0=NULL,type='full',pairs=NULL,Omega=TRUE,ntrials=1,alpha=1,be
   } #end for loop iter
 
   m <- cbind(1-rowSums(mbest),mbest)
-  clus<-extractMass(m,F,g=gbest,method="ecm",crit=Jbest)
+  clus<-extractMass(m,F,g=gbest,method="ecm",crit=Jbest,
+                    param=list(alpha=alpha,beta=beta,delta=delta))
   return(clus)
 }
 

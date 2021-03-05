@@ -16,6 +16,7 @@ ecm(
   beta = 2,
   delta = 10,
   epsi = 0.001,
+  init = "kmeans",
   disp = TRUE
 )
 }
@@ -49,6 +50,8 @@ included. Used only if type="pairs".}
 
 \item{epsi}{Minimum amount of improvement.}
 
+\item{init}{Initialization: "kmeans" (default) or "rand" (random).}
+
 \item{disp}{If TRUE (default), intermediate results are displayed.}
 }
 \value{
@@ -72,16 +75,17 @@ If  initial prototypes g0 are provided, the number of trials is automatically se
 }
 \examples{
 ## Clustering of the Four-class dataset
+\dontrun{
 data(fourclass)
 x<-fourclass[,1:2]
 y<-fourclass[,3]
 clus<-ecm(x,c=4,type='full',alpha=1,beta=2,delta=sqrt(20),epsi=1e-3,disp=TRUE)
 plot(clus,X=x,mfrow=c(2,2),ytrue=y,Outliers=TRUE,Approx=2)
 }
+}
 \references{
 M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy
 c-means algorithm. Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.
-Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
 \seealso{
 \code{\link{makeF}}, \code{\link{extractMass}}, \code{\link{recm}}, \code{\link{cecm}},

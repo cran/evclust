@@ -38,7 +38,6 @@
 #'T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
 #'dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
 #'
-#' Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 #' @examples
 #' ## Example with Four-class data
 #' data("fourclass")

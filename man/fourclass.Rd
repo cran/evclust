@@ -4,7 +4,9 @@
 \name{fourclass}
 \alias{fourclass}
 \title{Synthetic four-class dataset}
-\format{A data frame with three variables: x1, x2 and y (the true class).}
+\format{
+A data frame with three variables: x1, x2 and y (the true class).
+}
 \usage{
 data(fourclass)
 }

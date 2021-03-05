@@ -2,7 +2,7 @@
 % Please edit documentation in R/extractMass.R
 \name{extractMass}
 \alias{extractMass}
-\title{Creates an object of class "credalPart"}
+\title{Creates an object of class "credpart"}
 \usage{
 extractMass(
   mass,
@@ -10,18 +10,21 @@ extractMass(
   g = NULL,
   S = NULL,
   method,
-  crit,
+  crit = NULL,
   Kmat = NULL,
   trace = NULL,
   D = NULL,
-  W = NULL
+  W = NULL,
+  J = NULL,
+  param = NULL
 )
 }
 \arguments{
 \item{mass}{A credal partition (a matrix of n rows and f columns, where n is the
 number of objects and f is the number of focal sets).}
 
-\item{F}{Matrix (f,c) of focal sets.}
+\item{F}{Matrix (f,c) of focal sets. If the empty set is a focal set, it must correspond to
+the first row of F.}
 
 \item{g}{A c x d matrix of prototypes.}
 
@@ -40,12 +43,16 @@ each group of cluster.}
 \item{D}{The normalized dissimilarity matrix (for method \code{\link{kevclus}}).}
 
 \item{W}{The weight matrix (for method \code{\link{EkNNclus}}).}
+
+\item{J}{The matrix of indices (for method \code{\link{kevclus}}).}
+
+\item{param}{A method-dependent list of parameters.}
 }
 \value{
 An object of class "credpart"  with the following components:
 \describe{
 \item{method}{The method used to construct the credal partition (a character string).}
-\item{F}{Matrix of focal sets.}
+\item{F}{Matrix of focal sets. The first row always corresponds to the empty set.}
 \item{conf}{Masses assigned to the empty set, vector of length n.}
 \item{mass}{Mass functions, matrix of size (n,f).}
 \item{mass.n}{Normalized mass functions, matrix of size (n,f-1).}
@@ -54,12 +61,13 @@ An object of class "credpart"  with the following components:
 (if defined).}
 \item{pl}{Unnormalized plausibilities of the singletons, matrix of size (n,c).}
 \item{pl.n}{Normalized plausibilities of the singletons, matrix of size (n,c).}
+\item{p}{Probabilities derived from pl by the plausibility transformation, matrix of size (n,c).}
 \item{bel}{Unnormalized beliefs of the singletons, matrix of size (n,c).}
 \item{bel.n}{Normalized beliefs of the singletons, matrix of size (n,c).}
 \item{y.pl}{Maximum plausibility clusters, vector of length n.}
 \item{y.bel}{Maximum belief clusters, vector of length n.}
-\item{betp}{Unnormalized pignistic probabilities of the singletons.}
-\item{betp.n}{Normalized pignistic probabilityies of the singletons.}
+\item{betp}{Unnormalized pignistic probabilities of the singletons, matrix of size (n,c).}
+\item{betp.n}{Normalized pignistic probabilities of the singletons, matrix of size (n,c).}
 \item{Y}{Sets of clusters with maximum mass, matrix of size (n,c).}
 \item{outlier}{n-vector of 0's and 1's, indicating which objects are outliers. An outlier
 is an object such that the largest mass is assigned to the empty set.}
@@ -79,15 +87,17 @@ a list of length c. Each element upper.approx.nd[[i]] is a vector of objects.}
 \item{trace}{The trace of criterion values  (for methods \code{\link{kevclus}} and
 \code{\link{EkNNclus}}).}
 \item{W}{The weight matrix (for method \code{\link{EkNNclus}}).}
+\item{J}{The matrix of indices (for method \code{\link{kevclus}}).}
+\item{param}{A method-dependent list of parameters.}
 }
 }
 \description{
 \code{extractMass} computes different ouputs (hard, fuzzy, rough partions, etc.)
-from a credal partition and creates an object of class "credalPart".
+from a credal partition and creates an object of class "credpart".
 }
 \details{
 This function collects varied information on a credal partition and stores it in
-an object of class "credalPart". The lower and upper
+an object of class "credpart". The lower and upper
 approximations of clusters define rough partitions. They can be computed in two ways:
 either from the set of clusters with maximum mass, or from the set of non dominated clusters.
 A cluster \eqn{\omega_k} is non dominated if \eqn{pl(\omega_k)\ge bel(\omega_l)} for
@@ -95,11 +105,12 @@ all l different from k. Once a set of cluster \eqn{Y_i} has been computed for ea
 object i belongs to the lower approximation of cluster k if \eqn{Y_i={\omega_k}}. It
 belongs to the upper approximation of cluster k if \eqn{\omega_k \in Y_i}. See
 Masson and Denoeux (2008) for more details, and Denoeux and Kanjanatarakul (2016) for
-the interval dominance rule. The function creates an object of class \code{"credalpart"}.
-There are two methods for this class: \code{\link{plot.credpart}} and
-\code{\link{summary.credpart}}.
+the interval dominance rule. The function creates an object of class \code{"credpart"}.
+There are three methods for this class: \code{\link{plot.credpart}},
+\code{\link{summary.credpart}} and \code{\link{predict.credpart}}.
 }
 \examples{
+\dontrun{
 ## Four-class data
 data(fourclass)
 x<-fourclass[,1:2]
@@ -109,6 +120,7 @@ clus<-recm(D,c=4,delta=10,ntrials=1)
 summary(clus)
 plot(clus,X=x,mfrow=c(1,1),ytrue=y,Outliers=TRUE)
 }
+}
 \references{
 T. Denoeux and O. Kanjanatarakul. Beyond Fuzzy, Possibilistic and Rough: An
 Investigation of Belief Functions in Clustering. 8th International conference on soft
@@ -116,8 +128,6 @@ methods in probability and statistics, Rome, 12-14 September, 2016.
 
 M.-H. Masson and T. Denoeux. ECM: An evidential version of the fuzzy c-means algorithm.
 Pattern Recognition, Vol. 41, Issue 4, pages 1384-1397, 2008.
-
-Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
 \seealso{
 \code{\link{plot.credpart}}, \code{\link{summary.credpart}}

@@ -1,6 +1,6 @@
 build_matrices<-function(F){
   
-  # Function called by mass_from_P_new
+  # Function called by mass_from_P_new and pairwise_mass
   
   nbFoc<-nrow(F)
   C<-matrix(0,nbFoc,nbFoc)  # the matrix used to compute the degrees of conflict

@@ -5,8 +5,8 @@
 \title{Generating a credal partition by bootstraping Gaussian Mixture Models}
 \usage{
 bootclus(
-  X,
-  alpha = c(0.05, 0.95),
+  x,
+  conf = 0.9,
   B = 500,
   param = list(G = NULL),
   type = "pairs",
@@ -14,9 +14,9 @@ bootclus(
 )
 }
 \arguments{
-\item{X}{attribute matrix or data frame of size (n,p).}
+\item{x}{attribute matrix or data frame of size (n,p).}
 
-\item{alpha}{vector of quantiles (of length 2).}
+\item{conf}{confidence level (default: 0.90).}
 
 \item{B}{number of bootstrap samples (default=500)}
 
@@ -33,7 +33,7 @@ bootclus(
 A list with the following components:
 \describe{
 \item{clus}{An object of class '\code{Mclust}' returned by \code{Mclust}.}
-\item{Clus}{An object of class '\code{credalPart}' providing the output credal partition.}
+\item{Clus}{An object of class '\code{credpart}' providing the output credal partition.}
 \item{CI}{An array of dimension (2,n,n) containing the confidence intervals on pairwise probabilities.}
 \item{BelPl}{An array of dimension (2,n,n) containing the pairwise Bel-Pl intervals.}
 \item{Time}{A matrix of size (3,5) containing the computing time as returned by function \code{proctime}
@@ -53,14 +53,14 @@ This function uses the \code{mclust} package to generate and bootstrap the mixtu
 data("faithful")
 X<-faithful
 param=list(G=3)
-res.faithful<-bootclus(X,alpha=c(0.05,0.95),B=100,param=param)
+res.faithful<-bootclus(X,conf=0.90,B=100,param=param)
 ## Plot the results
 plot(res.faithful$Clus,X)
 }
 }
 \references{
 T. Denoeux. Calibrated model-based evidential clustering using bootstrapping. 
-Preprint arXiv:1912.06137, 2019.
+Information Sciences, Vol. 528, pages 17-45, 2020.
 }
 \seealso{
 \code{\link{ecm}}, \code{\link{recm}},

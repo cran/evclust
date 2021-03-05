@@ -61,8 +61,6 @@ plot(clus1,X=x,mfrow=c(2,2),ytrue=y)
 \references{
 T. Denoeux, S. Sriboonchitta and O. Kanjanatarakul. Evidential clustering of large
 dissimilarity data. Knowledge-Based Systems, vol. 106, pages 179-195, 2016.
-
-Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
 \seealso{
 \code{\link{extractMass}}, \code{\link{ecm}}, \code{\link{recm}},

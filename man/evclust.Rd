@@ -7,7 +7,7 @@
 \description{
 Various clustering algorithms that generate a credal partition, i.e., a set of mass
 functions. Mass functions quantify the cluster-membership uncertainty of the objects.
-The package consists in five main functions, implementing five different evidential
+The package consists in the following main functions, implementing different evidential
 clustering algorithms:
 \describe{
 \item{ecm}{Evidential c-means algorithm (Masson and Denoeux, 2008)}
@@ -15,6 +15,13 @@ clustering algorithms:
 \item{kevclus}{$k$-EVCLUS algorithm (Denoeux and Masson, 2004; Denoeux et al., 2016) }
 \item{EkNNclus}{E$k$-NNclus algorithm (Denoeux et al., 2015)}
 \item{cecm}{Constrained Evidential c-means algorithm (Antoine et al, 2012)}
+\item{kcevclus}{Constrained evidential clustering (Antoine et al., 2014; Li et al., 2018)}
+\item{bpec}{Belief peak evidential clustering (Su and Denoeux, 2019)}
+\item{nnevclus}{Neural-network based evidential clustering (Denoeux, 2020a)}
+\item{nnevclus_mb}{Neural-network based evidential clustering, minibatch version 
+(Denoeux, 2020a)}
+\item{bootclus}{Model-based evidential clustering using bootstrapping 
+(Denoeux, 2020b)}
 }
 }
 \references{
@@ -37,8 +44,25 @@ Pattern Recognition, Vol. 41, Issue 4, pages 1384--1397, 2008.
 
 M.-H. Masson and T. Denoeux. RECM: Relational Evidential c-means algorithm.
 Pattern Recognition Letters, Vol. 30, pages 1015--1026, 2009.
+
+V. Antoine, B. Quost, M.-H. Masson and T. Denoeux. CEVCLUS: Evidential clustering 
+with instance-level constraints for relational data. Soft Computing 18(7):1321-1335, 2014.
+
+F. Li, S. Li and T. Denoeux. k-CEVCLUS: Constrained evidential clustering of 
+large dissimilarity data. Knowledge-Based Systems 142:29-44, 2018.
+
+Z.-G. Su and T. Denoeux. BPEC: Belief-Peaks Evidential Clustering. IEEE Transactions 
+on Fuzzy Systems, 27(1):111-123, 2019.
+
+T. Denoeux. NN-EVCLUS: Neural Network-based Evidential Clustering. 
+arXiv:2009.12795, 2020a.
+
+T. Denoeux. Calibrated model-based evidential clustering using bootstrapping. 
+Information Sciences, Vol. 528, pages 17-45, 2020b.
 }
 \seealso{
 \code{\link{ecm}}, \code{\link{recm}},
-\code{\link{cecm}}, \code{\link{kevclus}}, \code{\link{EkNNclus}}.
+\code{\link{cecm}}, \code{\link{kevclus}}, \code{\link{EkNNclus}}, 
+\code{\link{kcevclus}}, \code{\link{bpec}}, \code{\link{nnevclus}}, 
+\code{\link{nnevclus_mb}}, \code{\link{bootclus}}.
 }

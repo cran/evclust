@@ -1,7 +1,7 @@
 mass_from_P_new<-function(P,c,type,pairs=NULL,Omega=TRUE,epsi=1e-4,
                           maxit=100,disp=FALSE){
   
-# Generation of a credal partition from bootstrap cofidence intervals. 
+# Generation of a credal partition from bootstrap confidence intervals. 
 # Function called by bootclus
   
   F<-makeF(c,type=type,pairs=pairs,Omega=Omega)
@@ -42,6 +42,10 @@ mass_from_P_new<-function(P,c,type,pairs=NULL,Omega=TRUE,epsi=1e-4,
       d<-as.vector(rowSums(d[,-i])%*%B)
       SAJA<-SAJA-t(A[[i]])%*%A[[i]]
       Q<-t(B)%*%(SAJA)%*%B
+      if((c==2) | (Omega==TRUE)){
+        d[f]<--1
+        Q[,f]<-rep(1,f)
+      }
       if(all(eigen(Q,symmetric=TRUE,only.values=TRUE)$values>0)){
         qp<-solve.QP(Dmat=Q, dvec=d, Amat=Amat, bvec=b,meq=1)
         m[i,]<-qp$solution

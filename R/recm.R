@@ -27,7 +27,7 @@
 #' @param ntrials Number of runs of the optimization algorithm (set to 1 if m0 is  supplied).
 #' @param alpha Exponent of the cardinality in the cost function.
 #' @param beta Exponent of masses in the cost function.
-#' @param delta2 Squared distance to the empty set.
+#' @param delta Distance to the empty set.
 #' @param epsi Minimum amount of improvement.
 #' @param maxit Maximum number of iterations.
 #' @param disp If TRUE (default), intermediate results are displayed.
@@ -36,7 +36,6 @@
 #'
 #'@references M.-H. Masson and T. Denoeux. RECM: Relational Evidential c-means algorithm.
 #'Pattern Recognition Letters, Vol. 30, pages 1015--1026, 2009.
-#'Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 #'
 #'@author Thierry Denoeux (from a MATLAB code written by Marie-Helene Masson).
 #'
@@ -46,9 +45,10 @@
 #' @seealso \code{\link{makeF}}, \code{\link{extractMass}}, \code{\link{ecm}}
 #'
 #' @examples ## Clustering of the Butterfly dataset
+#' \dontrun{
 #' n <- nrow(butterfly)
 #' D<-as.matrix(dist(butterfly))^2
-#' clus<-recm(D,c=2,delta2=50)
+#' clus<-recm(D,c=2,delta=sqrt(50))
 #' m<-clus$mass
 #' plot(1:n,m[,1],type="l",ylim=c(0,1),xlab="objects",ylab="masses")
 #' lines(1:n,m[,2],lty=2)
@@ -57,13 +57,14 @@
 #'
 #'  ## Clustering the protein data
 #'  data(protein)
-#'  clus <- recm(D=protein$D,c=4,type='full',alpha=0.2,beta=1.1,delta2=20)
+#'  clus <- recm(D=protein$D,c=4,type='full',alpha=0.2,beta=1.1,delta=sqrt(20))
 #'
 #'  z<- cmdscale(protein$D,k=2)
 #'  plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
+#'  }
 
 recm<- function(D,c,type='full',pairs=NULL,Omega=TRUE,m0=NULL,ntrials=1,alpha=1,beta=1.5,
-                delta2=quantile(D[upper.tri(D)|lower.tri(D)],0.95),epsi=1e-4,maxit=5000,
+                delta=quantile(D[upper.tri(D)|lower.tri(D)],0.95),epsi=1e-4,maxit=5000,
                 disp=TRUE){
 
 if((ntrials>1) & !is.null(m0)){
@@ -73,6 +74,9 @@ if((ntrials>1) & !is.null(m0)){
 D<-as.matrix(D)
 # Scalar products computation from distances
 
+delta2<-delta^2
+names(delta2)<-NULL
+
 n<-ncol(D)
 e <- rep(1,n)
 Q <- diag(n)-e%*%t(e)/n
@@ -81,7 +85,6 @@ XX <- -0.5 * Q %*% D %*% Q
 
 # Initializations
 F<-makeF(c,type,pairs,Omega)
-
 f<-nrow(F)
 card<- rowSums(F[2:f,])
 

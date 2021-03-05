@@ -4,7 +4,18 @@
 \alias{EkNNclus}
 \title{EkNNclus algorithm}
 \usage{
-EkNNclus(x, D, K, y0, ntrials = 1, q = 0.5, p = 1, disp = TRUE, tr = FALSE)
+EkNNclus(
+  x = NULL,
+  D,
+  K,
+  y0,
+  ntrials = 1,
+  q = 0.5,
+  b = 1,
+  disp = TRUE,
+  tr = FALSE,
+  eps = 1e-06
+)
 }
 \arguments{
 \item{x}{n x p data matrix (n instances, p attributes).}
@@ -20,11 +31,14 @@ EkNNclus(x, D, K, y0, ntrials = 1, q = 0.5, p = 1, disp = TRUE, tr = FALSE)
 \item{q}{Parameter in (0,1). Gamma is set to the inverse of the q-quantile of distances
 from the K nearest neighbors (same notation as in the paper).}
 
-\item{p}{Exponent of distances, \eqn{\alpha_{ij} = \phi(d_{ij}^p)}.}
+\item{b}{Exponent of distances, \eqn{\alpha_{ij} = \phi(d_{ij}^b)}.}
 
 \item{disp}{If TRUE, intermediate results are displayed.}
 
 \item{tr}{If TRUE, a trace of the cost function is returned.}
+
+\item{eps}{Minimal distance between two vectors (distances smaller than \code{eps}
+are replaced by \code{eps})}
 }
 \value{
 The credal partition (an object of class \code{"credpart"}). In addition to the
@@ -46,25 +60,27 @@ advised to start with a random partition of c clusters, c<n.
 }
 \examples{
 ## Clustering of the fourclass dataset
+\dontrun{
 data(fourclass)
 n<-nrow(fourclass)
 N=2
-clus<- EkNNclus(fourclass[,1:2],K=60,y0=(1:n),ntrials=N,q=0.9,p=2,disp=TRUE,tr=TRUE)
+clus<- EkNNclus(fourclass[,1:2],K=60,y0=(1:n),ntrials=N,q=0.9,b=2,disp=TRUE,tr=TRUE)
 ## Plot of the partition
-plot(clus,X=fourclass[,1:2],y=fourclass$y,Outliers=FALSE)
+plot(clus,X=fourclass[,1:2],ytrue=fourclass$y,Outliers=FALSE,plot_approx=FALSE)
 ## Plot of the cost function vs number of iteration
 L<-vector(length=N)
 for(i in 1:N) L[i]<-dim(clus$trace[clus$trace[,1]==i,])[1]
 imax<-which.max(L)
 plot(0:(L[imax]-1),-clus$trace[clus$trace[,1]==imax,3],type="l",lty=imax,
 xlab="time steps",ylab="energy")
-for(i in (1:N)) if(i != imax) lines(0:(L[i]-1),-clus$trace[clus$trace[,1]==i,3],type="l",lty=i)
+for(i in (1:N)) if(i != imax) lines(0:(L[i]-1),-clus$trace[clus$trace[,1]==i,3],
+type="l",lty=i)
+}
 }
 \references{
 T. Denoeux, O. Kanjanatarakul and S. Sriboonchitta.
  EK-NNclus: a clustering procedure based on the evidential K-nearest neighbor rule.
  Knowledge-Based Systems, Vol. 88, pages 57--69, 2015.
- Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
 \author{
 Thierry Denoeux.

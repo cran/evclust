@@ -15,9 +15,11 @@
 #' @param ntrials Number of runs of the algorithm (the best solution is kept).
 #' @param q  Parameter in (0,1). Gamma is set to the inverse of the q-quantile of distances
 #' from the K nearest neighbors (same notation as in the paper).
-#' @param p Exponent of distances, \eqn{\alpha_{ij} = \phi(d_{ij}^p)}.
+#' @param b Exponent of distances, \eqn{\alpha_{ij} = \phi(d_{ij}^b)}.
 #' @param disp If TRUE, intermediate results are displayed.
 #' @param tr If TRUE, a trace of the cost function is returned.
+#' @param eps Minimal distance between two vectors (distances smaller than \code{eps}
+#' are replaced by \code{eps})
 
 #'
 #' @return The credal partition (an object of class \code{"credpart"}). In addition to the
@@ -30,7 +32,6 @@
 #'@references T. Denoeux, O. Kanjanatarakul and S. Sriboonchitta.
 #'  EK-NNclus: a clustering procedure based on the evidential K-nearest neighbor rule.
 #'  Knowledge-Based Systems, Vol. 88, pages 57--69, 2015.
-#'  Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 #'
 #'@author Thierry Denoeux.
 #'
@@ -39,31 +40,37 @@
 #' @importFrom stats quantile
 #'
 #' @examples ## Clustering of the fourclass dataset
+#' \dontrun{
 #' data(fourclass)
 #' n<-nrow(fourclass)
 #' N=2
-#' clus<- EkNNclus(fourclass[,1:2],K=60,y0=(1:n),ntrials=N,q=0.9,p=2,disp=TRUE,tr=TRUE)
+#' clus<- EkNNclus(fourclass[,1:2],K=60,y0=(1:n),ntrials=N,q=0.9,b=2,disp=TRUE,tr=TRUE)
 #' ## Plot of the partition
-#' plot(clus,X=fourclass[,1:2],y=fourclass$y,Outliers=FALSE)
+#' plot(clus,X=fourclass[,1:2],ytrue=fourclass$y,Outliers=FALSE,plot_approx=FALSE)
 #' ## Plot of the cost function vs number of iteration
 #' L<-vector(length=N)
 #' for(i in 1:N) L[i]<-dim(clus$trace[clus$trace[,1]==i,])[1]
 #' imax<-which.max(L)
 #' plot(0:(L[imax]-1),-clus$trace[clus$trace[,1]==imax,3],type="l",lty=imax,
 #' xlab="time steps",ylab="energy")
-#' for(i in (1:N)) if(i != imax) lines(0:(L[i]-1),-clus$trace[clus$trace[,1]==i,3],type="l",lty=i)
+#' for(i in (1:N)) if(i != imax) lines(0:(L[i]-1),-clus$trace[clus$trace[,1]==i,3],
+#' type="l",lty=i)
+#' }
 
-EkNNclus <- function(x,D,K,y0,ntrials=1,q=0.5,p=1,disp=TRUE,tr=FALSE)
+EkNNclus <- function(x=NULL,D,K,y0,ntrials=1,q=0.5,b=1,disp=TRUE,tr=FALSE,
+                     eps=1e-6)
 {
+  p<-b
   # Computation of nearest neighbors
-  if(missing(x)) nn<-knn_dist(D,K) else {
+  if(is.null(x)) nn<-knn_dist(D,K) else {
     x<-as.matrix(x)
     nn<-get.knn(x,K)
   }
-
+ 
   index<-nn$nn.index
   n<-dim(index)[1]
-
+  nn$nn.dist<-pmax(matrix(eps,n,K),nn$nn.dist)
+  
   # Computation of matrix W
   g<-1/quantile(nn$nn.dist^p,q)
   alpha<-pmax(exp(-g*nn$nn.dist^p),1e-6)
@@ -106,14 +113,16 @@ EkNNclus <- function(x,D,K,y0,ntrials=1,q=0.5,p=1,disp=TRUE,tr=FALSE)
       ybest<-y
     } #end if
   } # end for itrial
-  #    m<-NULL
-  #    if(cred==TRUE){ # Computation of credal partition
-  alpha<-1-exp(-W)
-  m<-credal.partition(ybest,alpha,index)
-  #   } # end if
   c<-max(ybest)
-  F<-makeF(c,type='simple')
-  clus<-extractMass(m,F,method="EkNNclus",crit=critmax,trace=Trace,W=W)
+  if(c>1){
+    alpha<-1-exp(-W)
+    m<-credal.partition(ybest,alpha,index)
+    F<-makeF(c,type='simple')
+    clus<-extractMass(m,F,method="EkNNclus",crit=critmax,trace=Trace,W=W)
+  } else{
+    clus<-NULL
+    print("Error: degenerate solution (c=1)")
+  }
   return(clus)
 }
 

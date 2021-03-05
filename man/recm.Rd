@@ -14,7 +14,7 @@ recm(
   ntrials = 1,
   alpha = 1,
   beta = 1.5,
-  delta2 = quantile(D[upper.tri(D) | lower.tri(D)], 0.95),
+  delta = quantile(D[upper.tri(D) | lower.tri(D)], 0.95),
   epsi = 1e-04,
   maxit = 5000,
   disp = TRUE
@@ -45,7 +45,7 @@ columns equal to the number f of focal sets specified by 'type' and 'pairs'.}
 
 \item{beta}{Exponent of masses in the cost function.}
 
-\item{delta2}{Squared distance to the empty set.}
+\item{delta}{Distance to the empty set.}
 
 \item{epsi}{Minimum amount of improvement.}
 
@@ -72,9 +72,10 @@ If an initial credal partition m0 is provided, the number of trials is automatic
 }
 \examples{
 ## Clustering of the Butterfly dataset
+\dontrun{
 n <- nrow(butterfly)
 D<-as.matrix(dist(butterfly))^2
-clus<-recm(D,c=2,delta2=50)
+clus<-recm(D,c=2,delta=sqrt(50))
 m<-clus$mass
 plot(1:n,m[,1],type="l",ylim=c(0,1),xlab="objects",ylab="masses")
 lines(1:n,m[,2],lty=2)
@@ -83,15 +84,15 @@ lines(1:n,m[,4],lty=4)
 
  ## Clustering the protein data
  data(protein)
- clus <- recm(D=protein$D,c=4,type='full',alpha=0.2,beta=1.1,delta2=20)
+ clus <- recm(D=protein$D,c=4,type='full',alpha=0.2,beta=1.1,delta=sqrt(20))
 
  z<- cmdscale(protein$D,k=2)
  plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
+ }
 }
 \references{
 M.-H. Masson and T. Denoeux. RECM: Relational Evidential c-means algorithm.
 Pattern Recognition Letters, Vol. 30, pages 1015--1026, 2009.
-Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 }
 \seealso{
 \code{\link{makeF}}, \code{\link{extractMass}}, \code{\link{ecm}}

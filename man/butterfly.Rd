@@ -4,7 +4,9 @@
 \name{butterfly}
 \alias{butterfly}
 \title{Butterfly dataset}
-\format{A matrix with 12 rows and 2 column.}
+\format{
+A matrix with 12 rows and 2 column.
+}
 \usage{
 data(butterfly)
 }

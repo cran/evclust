@@ -4,13 +4,15 @@
 \name{protein}
 \alias{protein}
 \title{Protein dataset}
-\format{A list with three elements:
+\format{
+A list with three elements:
 \describe{
 \item{D}{The 213x213 dissimilarity matrix.}
 \item{class}{A 213-vector containing the class encoded a a factor with four levels:
 "G", "HA", "HB", "M".}
 \item{y}{A 213-vector containing the class encoded by an integer between 1 and 4.}
-}}
+}
+}
 \usage{
 data(protein)
 }

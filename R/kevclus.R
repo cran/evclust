@@ -16,7 +16,7 @@
 #' each object. In case 3, k is set to the number of columns of D.
 #'
 #' @param x nxp matrix of p attributes observed for n objects (optional).
-#' @param k Number of distances to compute for each object (default: n).
+#' @param k Number of distances to compute for each object (default: n-1).
 #' @param D nxn or nxk dissimilarity matrix (used only of x is not supplied).
 #' @param J nxk matrix of indices. D[i,j] is the distance between objects i and
 #' J[i,j]. (Used only if D is supplied and ncol(D)<n; then k is set to ncol(D).)
@@ -38,7 +38,7 @@
 #' @param tr If TRUE, a trace of the stress function is returned.
 #' @param change.order If TRUE, the order of objects is changed at each iteration of the
 #' Iterative Row-wise Quadratic Programming (IRQP) algorithm.
-
+#' @param norm Normalization of distances. 1: division by mean(D^2) (default); 2: division par n*p.
 #'
 #' @return The credal partition (an object of class \code{"credpart"}). In addition to the
 #' usual attributes, the output credal partition has the following attributes:
@@ -46,6 +46,7 @@
 #'   \item{Kmat}{The matrix of degrees of conflict. Same size as D.}
 #'   \item{D}{The normalized dissimilarity matrix.}
 #'   \item{trace}{Trace of the algorithm (Stress function vs iterations).}
+#'   \item{J}{The matrix of indices.}
 #'  }
 #'
 #'
@@ -59,7 +60,6 @@
 #'similarity matrix by a latent class model: A reappraisal of additive fuzzy clustering.
 #'Computational Statistics & Data Analysis, 53(8):3183--3193, 2009.
 #'
-#'  Available from \url{https://www.hds.utc.fr/~tdenoeux}.
 #'
 #'@author Thierry Denoeux.
 #'
@@ -75,21 +75,19 @@
 #' clus <- kevclus(D=protein$D,c=4,type='simple',d0=max(protein$D))
 #' z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
 #' plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
-#'
 #' ## Example with k=30
-#'
 #' clus <- kevclus(D=protein$D,k=30,c=4,type='simple',d0=max(protein$D))
 #' z<- cmdscale(protein$D,k=2)  # Computation of 2 attributes by Multidimensional Scaling
 #' plot(clus,X=z,mfrow=c(2,2),ytrue=protein$y,Outliers=FALSE,Approx=1)
 #' }
 #'
-kevclus<-function(x,k=n,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TRUE,maxit=1000,
-                     epsi=1e-5,d0=quantile(D,0.9),tr=FALSE,change.order=FALSE){
+kevclus<-function(x,k=n-1,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TRUE,maxit=1000,
+                     epsi=1e-5,d0=quantile(D,0.9),tr=FALSE,change.order=FALSE,norm=1){
 
   if(!missing(x)){ # x is supplied
     x<-as.matrix(x)
     n<-nrow(x)
-    if(k==n){ # k takes default value
+    if(k==(n-1)){ # k takes default value
       D<-as.matrix(dist(x))
       J<-matrix(0,n,n-1)
       D1<-J
@@ -99,7 +97,7 @@ kevclus<-function(x,k=n,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TR
       } # end for
       D<-D1
       p<-n-1
-    } else{ #k<n
+    } else{ #k<n-1
       dist<-createD(x,k)
       D<-dist$D
       J<-dist$J
@@ -109,7 +107,7 @@ kevclus<-function(x,k=n,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TR
     D<-as.matrix(D)
     n<-nrow(D)
     p<-ncol(D)
-    if((n==p) & (k==n)){ # D is square and k takes default value
+    if((n==p) & (k==(n-1))){ # D is square and k takes default value
       J<-matrix(0,n,n-1)
       D1<-J
       for(i in 1:n){
@@ -142,10 +140,10 @@ kevclus<-function(x,k=n,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TR
   }
 
  # distance normalization
- g=-log(0.05)/d0^2
- D<-1-exp(-g*D^2)
- C<-1/sum(D^2)
-
+  g=-log(0.05)/d0^2
+  D<-1-exp(-g*D^2)
+  if(norm==1) C<-1/sum(D^2) else C<-1/(n*p) 
+ 
   F<-makeF(c=c,type=type,pairs=pairs)
   f<-nrow(F)
   xi<-matrix(0,f,f)  # the matrix used to compute the degrees of conflict
@@ -210,15 +208,18 @@ kevclus<-function(x,k=n,D,J,c,type='simple',pairs=NULL,m0=NULL,ntrials=1,disp=TR
       mass.best<-mass
       Sbest<-S
       Tracebest<-Trace
-      }
-    print(c(N,S,Sbest))
+    }
+    if(disp){
+      if(ntrials>1) print(c(N,S,Sbest)) else print(c(N,S))
+    }
   } # end 'for' loop on trials
 
   for(i in 1:n){
     K[i,]=mass.best[i,] %*% xi %*% t(mass.best[J[i,],])
   }
 
-  clus<-extractMass(mass.best,F,method="kevclus",crit=Sbest,Kmat=K,D=D,trace=Tracebest)
+  clus<-extractMass(mass.best,F,method="kevclus",crit=Sbest,Kmat=K,D=D,
+                    trace=Tracebest,J=J)
   return(clus)
 
 }

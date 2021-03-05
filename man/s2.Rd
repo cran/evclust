@@ -4,7 +4,9 @@
 \name{s2}
 \alias{s2}
 \title{S2 dataset}
-\format{A matrix with 5000 rows and two columns.}
+\format{
+A matrix with 5000 rows and two columns.
+}
 \usage{
 data(s2)
 }

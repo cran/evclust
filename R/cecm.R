@@ -36,8 +36,8 @@
 #' of objects that belong to different classes.
 #' @param alpha Exponent of the cardinality in the cost function.
 #' @param delta Distance to the empty set.
-#' @param bal Tradeoff between the objective function Jecm and the constraints:
-#' Jcecm=(1-bal)Jecm + bal Jconst.
+#' @param xi Tradeoff between the objective function Jecm and the constraints:
+#' Jcecm=(1-xi)Jecm + xi Jconst.
 #' @param distance Type of distance use: 0=Euclidean, 1=Mahalanobis.
 #' @param epsi Minimum amount of improvement.
 #' @param disp If TRUE (default), intermediate results are displayed.
@@ -47,7 +47,7 @@
 #'
 #'@references V. Antoine, B. Quost, M.-H. Masson and T. Denoeux. CECM: Constrained
 #'Evidential C-Means algorithm. Computational Statistics and Data Analysis, Vol. 56,
-#'Issue 4, pages 894--914, 2012. Available from \url{https://www.hds.utc.fr/~tdenoeux}.
+#'Issue 4, pages 894--914, 2012. 
 #'
 #'Y. Ye. On affine-scaling algorithm for nonconvex quadratic programming.
 #'Math. Programming 56 (1992) 285--300.
@@ -62,6 +62,7 @@
 #' \code{\link{ecm}}, \code{\link{recm}}
 #'
 #' @examples ## Generation of a two-class dataset
+#' \dontrun{
 #' n<-30
 #' x<-cbind(0.2*rnorm(n),rnorm(n))
 #' y<-c(rep(1,n/2),rep(2,n/2))
@@ -72,8 +73,10 @@
 #' ## Call of cecm
 #' clus<-cecm(x=x,c=2,ML=const$M,CL=const$CL,delta=10)
 #' plot(x[,1],x[,2],asp=1,pch=clus$y.pl,col=y)
-cecm <- function(x,c,type='full',pairs=NULL,ntrials=1,ML,CL,g0=NULL,alpha=1,delta=10,bal=0.5,distance=0,epsi=1e-3,disp=TRUE){
-
+#' }
+cecm <- function(x,c,type='full',pairs=NULL,ntrials=1,ML,CL,g0=NULL,alpha=1,
+                 delta=10,xi=0.5,distance=0,epsi=1e-3,disp=TRUE){
+  bal<-xi
   x<-as.matrix(x)
   n<-nrow(x)
   nbAtt<-ncol(x)
@@ -139,7 +142,6 @@ cecm <- function(x,c,type='full',pairs=NULL,ntrials=1,ML,CL,g0=NULL,alpha=1,delt
       g <- x[sample(1:n,K),]+0.1*rnorm(K*nbAtt,K,nbAtt)
       #      g<-as.matrix(read.table('g.txt'))
     } else g<-g0
- #   print(g)
 
     # centers calculation for all the subsets
     gplus<-matrix(0,nbFoc-1,nbAtt)
@@ -237,10 +239,11 @@ cecm <- function(x,c,type='full',pairs=NULL,ntrials=1,ML,CL,g0=NULL,alpha=1,delt
     }
     res<-c(itrial,J,Jbest)
     names(res)<-NULL
-    print(res)
+    if (disp) print(res)
   } #end for loop iter
   #--------------------------- end of iterations ----------------------------
-  clus<-extractMass(mbest,F,g=gbest,S=Smeansbest,method="cecm",crit=Jbest)
+  clus<-extractMass(mbest,F,g=gbest,S=Smeansbest,method="cecm",crit=Jbest,
+                    param=list(alpha=alpha,beta=beta,delta=delta))
   return(clus)
 
 }

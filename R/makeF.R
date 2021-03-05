@@ -54,7 +54,9 @@ makeF<- function(c,type=c('simple','full','pairs'),pairs=NULL,Omega=TRUE){
         }
       }
     }
-    if(Omega) F<-rbind(F,rep(1,c))  # the whole frame
+    if(Omega & !((type=="pairs")&(c==2)) & !((type=="simple")&(c==1))){
+      F<-rbind(F,rep(1,c))  # the whole frame
+    }
   }
   row.names(F)<-NULL
   return(F)
