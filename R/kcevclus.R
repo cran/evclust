@@ -275,10 +275,8 @@ kcevclus<-function (x,k=n-1,D,J,c,ML,CL,xi=0.5,type="simple",pairs=NULL,m0=NULL,
         Trace$temps[k + 1, ] <- proc.time()[1:3] - ptm
         Trace$fct[k + 1] <- S
       }
-      if (disp) 
-        print(sprintf("% i %i %e %e", N, k, Spred, gain))
-      gain <- 0.5 * gain + 0.5 * abs(Spred - S)/(1e-09 + 
-                                                   abs(Spred))
+      if (disp) print(sprintf("% i %i %e %e", N, k, Spred, gain))
+      gain <- 0.5 * gain + 0.5 * abs(Spred - S)/(1e-09 + abs(Spred))
       Spred <- S
     }
     if (S < Sbest) {
@@ -286,7 +284,7 @@ kcevclus<-function (x,k=n-1,D,J,c,ML,CL,xi=0.5,type="simple",pairs=NULL,m0=NULL,
       Sbest <- S
       Tracebest <- Trace
     }
-    print(c(N, S, Sbest))
+    if (disp) print(c(N, S, Sbest))
   }
   for (i in 1:n) {
     K[i, ] = mass.best[i, ] %*% C1 %*% t(mass.best[J[i, ], ])

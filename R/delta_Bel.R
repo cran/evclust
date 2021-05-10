@@ -16,6 +16,7 @@
 #' \item{BelC}{The belief values.}
 #' \item{delta}{The delta values.}
 #' \item{g0}{A c*d matrix containing the prototypes.}
+#' \item{ii}{List of indices of the belief peaks.}
 #' }
 #'
 #'@references Z.-G. Su and T. Denoeux. BPEC: Belief-Peaks Evidential Clustering. IEEE Transactions 
@@ -75,6 +76,6 @@ delta_Bel<-function(x,K,q=0.9){
   g0<-x[ii,]
   
   
-  return(list(BelC=BelC,delta=delta,g0=g0))
+  return(list(BelC=BelC,delta=delta,g0=g0,ii=ii))
 } 
   

@@ -11,8 +11,8 @@
 #' @param type Type of focal sets ("simple": \eqn{\emptyset}, singletons and \eqn{\Omega};
 #' "full": all \eqn{2^c} subsets of \eqn{\Omega}; "pairs": \eqn{\emptyset}, singletons,
 #' \eqn{\Omega}, and all or selected pairs). Argument passed to \code{makeF}.
-#' @param Omega Logical. If TRUE (default), \eqn{\Omega} is a focal set (for types 'simple' and
-#' 'pairs'). Argument passed to \code{makeF}.
+#' @param Omega Logical. If TRUE, \eqn{\Omega} is a focal set. Default is FALSE. 
+#' Argument passed to \code{makeF}.
 #' 
 #'
 #' @return A list with the following components:
@@ -66,7 +66,7 @@ bootclus<-function(x,conf=0.90,B=500,param=list(G=NULL),type="pairs",Omega=FALSE
   Time[1,]<-proc.time()-ptm
   
   # Computation of quantiles
-  CI<-apply(R1,1:2,quantile,alpha)
+  CI<-apply(R1,1:2,quantile,probs=alpha,na.rm=TRUE)
   RR<-list(Me=matrix(0,N,N),M1=CI[1,,],M0=1-CI[2,,])
   Time[2,]<-proc.time()-Time[1,]
   

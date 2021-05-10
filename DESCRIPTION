@@ -1,8 +1,8 @@
 Package: evclust
 Type: Package
 Title: Evidential Clustering
-Version: 2.0.0
-Date: 2021-03-02
+Version: 2.0.1
+Date: 2021-05-04
 Author: Thierry Denoeux
 Maintainer: Thierry Denoeux <tdenoeux@utc.fr>
 Description: Various clustering algorithms that produce a credal partition,
@@ -14,14 +14,13 @@ Description: Various clustering algorithms that produce a credal partition,
     Evidential Clustering, Belief Peak Evidential Clustering, Neural-Network-based
     Evidential Clustering. 
 Depends: R (>= 3.6.0),
-Imports: FNN, R.utils, limSolve, Matrix, mclust, quadprog, plyr,
-        kernlab, MASS
+Imports: FNN, R.utils, limSolve, Matrix, mclust, quadprog, plyr
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 7.1.1
 VignetteBuilder: utils
-Suggests: utils
+Suggests: utils, kernlab, MASS
 NeedsCompilation: no
-Packaged: 2021-03-05 01:39:38 UTC; Thierry
+Packaged: 2021-05-05 02:42:51 UTC; Thierry
 Repository: CRAN
-Date/Publication: 2021-03-05 06:10:09 UTC
+Date/Publication: 2021-05-10 13:50:05 UTC

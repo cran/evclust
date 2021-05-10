@@ -20,6 +20,7 @@ A list with three elements:
 \item{BelC}{The belief values.}
 \item{delta}{The delta values.}
 \item{g0}{A c*d matrix containing the prototypes.}
+\item{ii}{List of indices of the belief peaks.}
 }
 }
 \description{

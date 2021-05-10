@@ -1,6 +1,7 @@
 \documentclass[nojss]{jss}
 
 %\VignetteIndexEntry{evclust_vignette}
+%\VignetteDepends{kernlab,MASS,mclust}
 
 %% -- LaTeX packages and custom commands ---------------------------------------
 
@@ -915,7 +916,7 @@ print(adjustedRandIndex(clus.cecm$y.pl, y))
 <<plot_constraints, echo=FALSE, fig=TRUE, height=5,width=5>>=
 plot(x,pch=y,col=y,xlab=expression(x[1]),ylab=expression(x[2]))
 for(k in sample(nrow(const$ML),20)) lines(x[const$ML[k,],1],x[const$ML[k,],2])
-for(k in sample(nrow(const$ML),20)) lines(x[const$CL[k,],1],x[const$CL[k,],2],lty=2)
+for(k in sample(nrow(const$CL),20)) lines(x[const$CL[k,],1],x[const$CL[k,],2],lty=2)
 @
 (a)
 \end{minipage}

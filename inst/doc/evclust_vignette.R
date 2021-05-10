@@ -352,7 +352,7 @@ print(adjustedRandIndex(clus.cecm$y.pl, y))
 ###################################################
 plot(x,pch=y,col=y,xlab=expression(x[1]),ylab=expression(x[2]))
 for(k in sample(nrow(const$ML),20)) lines(x[const$ML[k,],1],x[const$ML[k,],2])
-for(k in sample(nrow(const$ML),20)) lines(x[const$CL[k,],1],x[const$CL[k,],2],lty=2)
+for(k in sample(nrow(const$CL),20)) lines(x[const$CL[k,],1],x[const$CL[k,],2],lty=2)
 
 
 ###################################################

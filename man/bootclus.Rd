@@ -26,8 +26,8 @@ bootclus(
 "full": all \eqn{2^c} subsets of \eqn{\Omega}; "pairs": \eqn{\emptyset}, singletons,
 \eqn{\Omega}, and all or selected pairs). Argument passed to \code{makeF}.}
 
-\item{Omega}{Logical. If TRUE (default), \eqn{\Omega} is a focal set (for types 'simple' and
-'pairs'). Argument passed to \code{makeF}.}
+\item{Omega}{Logical. If TRUE, \eqn{\Omega} is a focal set. Default is FALSE. 
+Argument passed to \code{makeF}.}
 }
 \value{
 A list with the following components:

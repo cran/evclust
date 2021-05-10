@@ -1,8 +1,10 @@
 Package: evclust
 Title: Evidential Clustering
-Version: 2.0.0
+Version: 2.0.1
 
-This is a major update with several new functions, including bpec for belief peak evidential clustering, kcevclus for constraint evidential clustering, nnevclus for neural-network based evidential clustering. The new function credal_RI computes generalizations of the Rand index to compare credal partitions. The new S3 method "predict" makes it possible to compute an evidential partition for new data, using the results of ecm or nnevclus for the training data. The plot method has been updated.
+Version 2.0.0 wass a major update with several new functions, including bpec for belief peak evidential clustering, kcevclus for constraint evidential clustering, nnevclus for neural-network based evidential clustering. The new function credal_RI computes generalizations of the Rand index to compare credal partitions. The new S3 method "predict" makes it possible to compute an evidential partition for new data, using the results of ecm or nnevclus for the training data. The plot method has been updated.
+
+Version 2.0.1 implements some minor improvements and bug fixes.
 
 References:
 
