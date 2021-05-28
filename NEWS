@@ -1,14 +1,16 @@
 Package: evclust
 Title: Evidential Clustering
-Version: 2.0.1
+Version: 2.0.2
 
-Version 2.0.0 wass a major update with several new functions, including bpec for belief peak evidential clustering, kcevclus for constraint evidential clustering, nnevclus for neural-network based evidential clustering. The new function credal_RI computes generalizations of the Rand index to compare credal partitions. The new S3 method "predict" makes it possible to compute an evidential partition for new data, using the results of ecm or nnevclus for the training data. The plot method has been updated.
+Version 2.0.0 was a major update with several new functions, including bpec for belief peak evidential clustering, kcevclus for constraint evidential clustering, nnevclus for neural-network based evidential clustering. The new function credal_RI computes generalizations of the Rand index to compare credal partitions. The new S3 method "predict" makes it possible to compute an evidential partition for new data, using the results of ecm or nnevclus for the training data. The plot method has been updated.
 
 Version 2.0.1 implements some minor improvements and bug fixes.
+
+Version 2.0.2 has a minor bug fixed.
 
 References:
 
 T. Denoeux, S. Li and S. Sriboonchitta. Evaluating and Ccmparing soft partitions: an approach based on Dempster-Shafer Theory. IEEE Transactions on Fuzzy Systems 26(3):1231-1244, 2018.
 F. Li, S. Li and T. Denoeux. k-CEVCLUS: Constrained evidential clustering oflarge dissimilarity data. Knowledge-Based Systems 142:29-44, 2018.
 Z.-G. Su and T. Denoeux. BPEC: Belief-Peaks Evidential Clustering. IEEE Transactions on Fuzzy Systems, 27(1):111-123, 2019.
-T. Denoeux. NN-EVCLUS: Neural Network-based Evidential Clustering. arXiv:2009.12795, 2020.
+T. Denoeux. NN-EVCLUS: Neural Network-based Evidential Clustering. Information Sciences, 572:297-330, 2021.

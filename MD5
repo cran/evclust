@@ -1,6 +1,6 @@
-f44ed426a25976ce31e2c4e887ae68c4 *DESCRIPTION
+6de7be4f606ef1258fc7e48d879dfca0 *DESCRIPTION
 27518456277a63bede4f8d7f38c2712d *NAMESPACE
-d61fbbf3fe20236d887a4cc478d9f027 *NEWS
+6c51f9e208d64e42f5c09f192008ec38 *NEWS
 59225c1eaa64cece35c337a88ba507b1 *R/Bel_dist.R
 7c514a5bb24f4eff13e48b390ee46a41 *R/EkNNclus.R
 9db794bddaf332c187bfacf8b16cd129 *R/bananas.R
@@ -25,7 +25,7 @@ d3cfbf6afa69b7c03d7ba07b566faa8c *R/evclust.R
 ea4a198fa1591e4331e6fc0a009eed0f *R/fg.pcca.R
 1a36c981fd12fdbf33bc40d121dbd914 *R/fourclass-data.R
 9226f9abe574a957ddbb07610bea2e54 *R/functions_NN_EVCLUS.R
-c53d7e1a9c13e139c77eb9a38c777f6e *R/harris.R
+4d909311138ed3e1e2e1d53c25abacd5 *R/harris.R
 8ce87caf8e49a308a6a838166c717d74 *R/jousselme_dist.R
 6bf9526de18dd66029466c64a26e0173 *R/kcevclus.R
 df6bc7d7fec4b31fb2d68b0725fe314d *R/kevclus.R
@@ -33,8 +33,8 @@ b3b768ec07e1b1759cb29865da5d4f67 *R/knn_dist.R
 54d718139f8a97bde81f015c3d3f5628 *R/kpcca.R
 e56720ccfd2444b0443ea45b611548c4 *R/makeF.R
 bc29587523bc3532f8f9cfbe3917ec32 *R/mass_from_P_new.R
-49aa4d7b6eed688e3eae00b36dfd65b4 *R/nnevclus.R
-f9ad5d20db9e2ec4d35511c6db85d892 *R/nnevclus_mb.R
+481bc08c7e19a99e66895f315772e316 *R/nnevclus.R
+bbf622b41447798378db45dc65ac2c9f *R/nnevclus_mb.R
 f5d9c6f5f03aa499992ca5fd80898486 *R/nonspecificity.R
 239785cc1706dd4d059e8de5b12fbb2a *R/normalize.credpart.R
 29019035d89849bcae0a573c8034ced4 *R/pairwise_mass.R
@@ -56,7 +56,7 @@ bd3a9e6ec44171fbde7266ca7290114f *data/protein.RData
 a55edf4611e289238f6d3040a406e781 *data/s2.RData
 2bb15212a48119e3ca2af4af6a336946 *inst/doc/evclust_vignette.R
 8088eab54127e7b94623edefad642c90 *inst/doc/evclust_vignette.Rnw
-f2e441600316a333cb0f15ab4bb92b7e *inst/doc/evclust_vignette.pdf
+20197a79097b929893ca58c955f7f9b9 *inst/doc/evclust_vignette.pdf
 ffeec4c9600e42a063e5a44d4531ff9e *man/EkNNclus.Rd
 a62c455512de4c4dd79047104040e459 *man/bananas.Rd
 f8de1e4f3d7ceebd3324e18f777a665a *man/bootclus.Rd
@@ -75,14 +75,14 @@ beece337edc8ead0c90c0a2a4d11e37a *man/evclust.Rd
 af915b3a6a8eed2fb2577365dbbe9e1f *man/expandlink.Rd
 c486f227c361a248df1a6f334920ae50 *man/extractMass.Rd
 f9395deceb8c191b5632de0888b51c0e *man/fourclass.Rd
-367d27a1096dc402951947abd62a2fe3 *man/harris.Rd
+6d8d6cb29023d1c6d15a7f370398603a *man/harris.Rd
 4ffd484df3c22f8f6d2600204f1039d0 *man/kcevclus.Rd
 2f4e29e7aca0572aa7e9209f506a6e3f *man/kevclus.Rd
 2705a245dd60c18004a219aff5621dc8 *man/knn_dist.Rd
 36d4242182efe9c7878b372ccf3ba51f *man/kpcca.Rd
 09507ea54c494faabfe6b570cade67cb *man/makeF.Rd
-c689063247b4e372a439176c610c71c1 *man/nnevclus.Rd
-5e1bf04ce7ec5a6cb46337625c193ffc *man/nnevclus_mb.Rd
+2b8f6c7458a29a30f0495bdfb5a079cb *man/nnevclus.Rd
+64996ae13de61a3e2552067f99f0ddac *man/nnevclus_mb.Rd
 fadd405307a86e15ef83a32246cb1884 *man/nonspecificity.Rd
 88a54e73cee7fc6526cc310a907eee94 *man/normalize.credpart.Rd
 dd8fdd6e5a1d0ed5965f2f7802a8e747 *man/pairwise_mass.Rd
@@ -94,4 +94,4 @@ d91fad62c212020e631762dff95a954a *man/recm.Rd
 de29a7281eb6416ca726148f78ec199d *man/s2.Rd
 3a95ae5688e3683fa3a54665b521bd0c *man/summary.credpart.Rd
 8088eab54127e7b94623edefad642c90 *vignettes/evclust_vignette.Rnw
-a1510dee47764a2214a0318484e1b840 *vignettes/refs.bib
+651b59e68f92cf88053fd4b6f9586aa2 *vignettes/refs.bib

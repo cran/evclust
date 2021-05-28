@@ -50,7 +50,7 @@
 #'
 #'
 #'@references T. Denoeux. NN-EVCLUS: Neural Network-based Evidential Clustering. 
-#'arXiv:2009.12795, 2020.
+#'Information Sciences, Vol. 572, Pages 297-330, 2021.
 #'
 #'@author Thierry Denoeux.
 #'

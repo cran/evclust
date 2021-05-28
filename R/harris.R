@@ -37,7 +37,7 @@
 #' 
 #' @examples 
 #' opt<-harris(function(x) return(list(fun=sum(x^2),grad=2*x)),rnorm(2),tr=TRUE)
-#' print(opt$par,opt$value)
+#' print(c(opt$par,opt$value))
 #' plot(opt$trace$fct,type="l")
 #'
 
