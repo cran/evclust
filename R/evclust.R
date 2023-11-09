@@ -21,6 +21,7 @@
 #'
 #' @docType package
 #' @name evclust
+#' @aliases evclust-package
 #'
 #' @seealso \code{\link{ecm}}, \code{\link{recm}},
 #'\code{\link{cecm}}, \code{\link{kevclus}}, \code{\link{EkNNclus}}, 

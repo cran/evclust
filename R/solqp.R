@@ -51,7 +51,7 @@ solqp<- function(Q,A,b,c,x,verbose=FALSE,toler=1e-5,beta=0.8){
   alpha <- 0.9
   comp<- runif(n)
   comp<-solve(rbind(cbind(Diagonal(n),t(A)),cbind(A,Matrix(0,m,m))),
-              rbind(comp,Matrix(0,m,1)))
+              c(as.vector(comp), double(m)))
   comp<-comp[1:n]
   nora<-min(comp/x)
   if(nora < 0) nora <- -.01/nora else{
@@ -90,9 +90,8 @@ solqp<- function(Q,A,b,c,x,verbose=FALSE,toler=1e-5,beta=0.8){
 
 
     while(go <= 0){
-
       u<-solve(rbind(cbind(XX+lamda*Diagonal(n),t(AA)),cbind(AA,Matrix(0,m,m))),
-               rbind(-x*gg,Matrix(0,m,1)))
+               c(-as.vector(x*gg), double(m)))
       xx<-x+x*u[1:n]
       go<-min(xx)
       if(go > 0){
@@ -106,7 +105,6 @@ solqp<- function(Q,A,b,c,x,verbose=FALSE,toler=1e-5,beta=0.8){
          return()
          }
       }
-
 
        y<- -u[(n+1):(n+m)]
        u<-u[1:n]

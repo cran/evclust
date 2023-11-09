@@ -3,6 +3,7 @@
 \docType{package}
 \name{evclust}
 \alias{evclust}
+\alias{evclust-package}
 \title{evclust: A package for evidential clustering}
 \description{
 Various clustering algorithms that generate a credal partition, i.e., a set of mass

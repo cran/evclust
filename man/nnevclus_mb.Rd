@@ -18,8 +18,8 @@ nnevclus_mb(
   Is = NULL,
   nu = 0,
   disp = TRUE,
-  options = list(Niter = 1000, epsi = 0.001, rho = 0.9, delta = 1e-08, Dtmax = 100,
-    print = 5),
+  options = list(Niter = 1000, epsi = 0.001, rho = 0.9, delta = 1e-08, Dtmax = 100, print
+    = 5),
   param0 = list(V0 = NULL, W0 = NULL, beta0 = NULL)
 )
 }

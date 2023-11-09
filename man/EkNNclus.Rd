@@ -24,7 +24,7 @@ EkNNclus(
 
 \item{K}{Number of neighbors.}
 
-\item{y0}{Initial partition (vector of length n, with values in {1,2,...}).}
+\item{y0}{Initial partition (vector of length n, with values in (1,2,...)).}
 
 \item{ntrials}{Number of runs of the algorithm (the best solution is kept).}
 

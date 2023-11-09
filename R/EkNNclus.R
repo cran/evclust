@@ -11,7 +11,7 @@
 #' @param x n x p data matrix (n instances, p attributes).
 #' @param D n x n dissimilarity matrix (used only if x is not supplied).
 #' @param K Number of neighbors.
-#' @param y0 Initial partition (vector of length n, with values in {1,2,...}).
+#' @param y0 Initial partition (vector of length n, with values in (1,2,...)).
 #' @param ntrials Number of runs of the algorithm (the best solution is kept).
 #' @param q  Parameter in (0,1). Gamma is set to the inverse of the q-quantile of distances
 #' from the K nearest neighbors (same notation as in the paper).
